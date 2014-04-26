@@ -27,4 +27,4 @@ $(window).load(function() {
       console.log('Good to see you, ' + response.name + '.');
     });
   }
-}
+});
