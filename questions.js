@@ -12,17 +12,17 @@ $(window).load(function() {
     $("input[type=submit]").css("display", "none");
   
     if ($("label.selected input").attr("value") == 0) {
-	  // They got the question correct! Hurah!
-	  score++;
-	} else {
-	  // Incorrect answer
-	  console.log($("label.selected input").attr("value"));
-	  $("label.selected").addClass("incorrect");
-	}
-	// Mark the correct answer
-	$("label input[value=0]").parent().addClass("correct");
-	
-	$("#next_question_button").css("display", "block");
+    // They got the question correct! Hurah!
+    score++;
+  } else {
+    // Incorrect answer
+    console.log($("label.selected input").attr("value"));
+    $("label.selected").addClass("incorrect");
+  }
+  // Mark the correct answer
+  $("label input[value=0]").parent().addClass("correct");
+  
+  $("#next_question_button").css("display", "block");
   }
 
   // Sends off an AJAX request to server to fetch the info
@@ -36,7 +36,7 @@ $(window).load(function() {
     loaderDiv.css('left', '0px');
     loaderDiv.css('width', '100%');
     loaderDiv.css('height', '100%');
-    loaderDiv.css('background', 'rgba(255, 255, 255, 0.2');
+    loaderDiv.css('background', 'rgba(255, 255, 255, 0.7');
 
     loaderDiv.attr('id', 'loader-div');
 
@@ -77,11 +77,11 @@ $(window).load(function() {
   }
 
   function displayNextQuestion(data) {
-    //$('loader-div').remove();
+    $('loader-div').remove();
 
     question = data.question;
-	$("input[type=submit]").css("display", "block");
-	$("#next_question_button").css("display", "none");
+  $("input[type=submit]").css("display", "block");
+  $("#next_question_button").css("display", "none");
     $("#question span").html("Question #" + questionNumber);
     $("#question p").html(question.question_text);
 
@@ -91,7 +91,7 @@ $(window).load(function() {
     }
 
     $("#answers ul li label").each(function(index) {
-	  $(this).removeClass();
+    $(this).removeClass();
       if(question.answers.uids) {
         var rand = Math.floor(Math.random() * indices.length);
         var newIndex = indices[rand];
