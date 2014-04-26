@@ -22,6 +22,8 @@
           <li><label><input type="radio" name="selection" value="2" />Nicholas Reiter</label></li>
           <li><label><input type="radio" name="selection" value="3" />Colin Miller</label></li>
         </ul>
+
+      <input type="submit" value="Next Question" id="next_question_button" />
       </div>
     </div>
   </body>
