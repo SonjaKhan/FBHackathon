@@ -4,12 +4,12 @@ $(window).load(function() {
   // Click handler for the next question button
   $(document).on('click', '#next_question_button', fetchNextQuestion);
   $(document).on('click', '#begin a', beginQuestions);
-  $(document).on('click', 'input[type=submit], label.selected', checkQuestion);
+  $(document).on('click', 'label.selected', checkQuestion);
   
   // Check this answer to see if it's correct
-  function checkQuestion(e) {
-    e.preventDefault();
-    $("input[type=submit]").css("display", "none");
+  function checkQuestion() {
+    //e.preventDefault();
+    //$("input[type=submit]").css("display", "none");
   
     if ($("label.selected input").attr("value") == 0) {
 	  // They got the question correct! Hurah!
@@ -22,13 +22,13 @@ $(window).load(function() {
 	// Mark the correct answer
 	$("label input[value=0]").parent().addClass("correct");
 	
-	$("#next_question_button").css("display", "block");
+	windows.setTimeout(fetchNextQuestion, 1000);
+	//$("#next_question_button").css("display", "block");
   }
 
   // Sends off an AJAX request to server to fetch the info
   // for the next question
-  function fetchNextQuestion(e) {
-    e.preventDefault();
+  function fetchNextQuestion() {
 
     var loaderDiv = $(document.createElement('div'));
     loaderDiv.css('position', 'fixed');
@@ -69,17 +69,18 @@ $(window).load(function() {
   }
 
   function beginQuestions(e) {
+    e.preventDefault();
     $('#prompt').css('display', 'none');
     $('#content').css('display', 'block');
-    fetchNextQuestion(e);
+    fetchNextQuestion();
   }
 
   function displayNextQuestion(data) {
     $('loader-div').remove();
 
     question = data.question;
-	$("input[type=submit]").css("display", "block");
-	$("#next_question_button").css("display", "none");
+	//$("input[type=submit]").css("display", "block");
+	//$("#next_question_button").css("display", "none");
     $("#question span").html("Question #" + questionNumber);
     $("#question p").html(question.question_text);
 

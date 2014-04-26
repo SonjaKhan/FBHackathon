@@ -102,6 +102,11 @@
 		background-color: #FFE0E0;
 	}
 	
+	#answers ul li label span {
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	
 #begin, #begin + p {
   display: none;
 }
@@ -124,7 +129,7 @@ h1 {
 	font-size: 36pt; text-align: center;
 }
 
-input[type=submit] {
+input[type=submit], #next_question_button {
 	display: none;
 }
 
