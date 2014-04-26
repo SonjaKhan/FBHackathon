@@ -1,8 +1,7 @@
 $(window).load(function() {
   var questionNumber = 1;
   var score = 0;
-  // Click handler for the next question button
-  $(document).on('click', '#next_question_button', fetchNextQuestion);
+
   $(document).on('click', '#begin a', beginQuestions);
   $(document).on('click', 'label', checkQuestion);
 
@@ -24,7 +23,8 @@ $(window).load(function() {
     // Mark the correct answer
     $("label input[value=0]").parent().addClass("correct");
 
-    window.setTimeout(fetchNextQuestion, (gotIt) ? 1500 : 2500);
+    fetchNextQuestion();
+    //window.setTimeout(fetchNextQuestion, (gotIt) ? 1500 : 2500);
     //$("#next_question_button").css("display", "block");
   }
 
