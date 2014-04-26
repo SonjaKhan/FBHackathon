@@ -76,6 +76,10 @@ function getHometownQuestion($facebook) {
     $j = rand(0, count($hometownToPeople) - 1);
     $randomCity = array_rand($hometownToPeople);
     echo $randomCity;
+    echo "<br>";
+    print_r($hometownToPeople[$randomCity]);
+    echo "<br>";
+
     $randomUIDInCity = array_rand($hometownToPeople[$randomCity]);
     array_push($answersUID, $randomUIDInCity);
   }
