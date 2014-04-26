@@ -252,9 +252,19 @@ function getFriendCountQuestion($facebook) {
       $count = $friend['mutual_friend_count'];
       if (!in_array($count, $answersCounts)) {
         $name = $friend['name'];
-        array_push($answersUIDs, $uid);
-        array_push($answersNames, $name);
-        array_push($answersCounts, $count);
+        if ($count < $maxCount) {
+          array_push($answersUIDs, $uid);
+          array_push($answersNames, $name);
+          array_push($answersCounts, $count);
+        } else {
+          $maxCount = $count;
+          array_push($answersUIDs, $answersUIDs[0]);
+          array_push($answersNames, $answersNames[0]);
+          array_push($answersCounts, $answersCounts[0]);
+          $answersUIDs[0] = $uid;
+          $answersNames[0] = $name;
+          $answersCounts[0] = $count;
+        }
       }
     }
   }
