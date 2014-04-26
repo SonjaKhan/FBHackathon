@@ -45,7 +45,7 @@
           FB.api('/me/permissions', function (response) {
             if(response.data[0]['user_hometown'] == 1) {
               console.log('Permissions are granted.');
-              $('#content').css('display', 'block');
+              $('#begin').css('display', 'block');
               $('#login').css('display', 'none');
             }
           });
@@ -71,8 +71,16 @@
 
     </script>
 
+    <h1>
+      Super Awesome App
+    </h1>
+
     <a href="#" id="login">
-      Login
+      Please Login
+    </a>
+
+    <a href="#" id="begin">
+      Begin!
     </a>
 
     <div id="content">
