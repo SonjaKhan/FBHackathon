@@ -14,11 +14,11 @@ $(window).load(function() {
       // They got the question correct! Hurah!
       score++;
       gotIt = true;
-      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#E0FFE0, #E0FFE0)");
+      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#C0FFC0, #E0FFE0)");
     } else {
       // Incorrect answer
       $("label.selected").addClass("incorrect");
-      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#FFE0E0, #FFE0E0)");
+      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#FFC0C0, #FFE0E0)");
     }
     // Mark the correct answer
     $("label input[value=0]").parent().addClass("correct");
@@ -31,7 +31,7 @@ $(window).load(function() {
     $("#question").append($("<span>").html("Summary"));
 	$("#question").append($("<div>").attr("id", "finalPercent").html((score / (questionNumber - 1)) + "%"));
 	$("#question").append($("<p>").html("Of 15 questions about your friends, you got " + score + "!"));
-	$("#question").append($("<a>").attr("id", "postScores").attr("src","#").html("Click here to share your score!"));
+	$("#question").append($("<a>").attr("id", "postScores").attr("href","#").html("Click here to share your score!"));
   }
 
   // Sends off an AJAX request to server to fetch the info
