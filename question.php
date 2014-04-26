@@ -22,10 +22,16 @@ if ($user_id) {
                         'query' => 'SELECT uid1 FROM friend WHERE uid2=me()',
                         ));
 
-    # getHometownQuestion($facebook);
-    # getStatusQuestion($facebook);
-    # getBirthdayQuestion($facebook);
-    getInterestsQuestion($facebook);
+    $type = rand(0, 2);
+    if ($type == 0) {
+      getHometownQuestion($facebook);
+    } else if ($type == 1) {
+      getStatusQuestion($facebook);
+    } else {
+      getBirthdayQuestion($facebook);
+    }
+    # getInterestsQuestion($facebook);
+    
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
@@ -74,7 +80,7 @@ function getHometownQuestion($facebook) {
   $question = "Who is from " . $questionHometown . "?";
 
   $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
-  toJSON($questionArr);
+  toJSON($questionArr, "hometown");
 }
 
 
@@ -88,6 +94,19 @@ function getStatusQuestion($facebook) {
   $answerNames = array();
   $answerUIDs = array();
 
+  $statuses = array();
+
+  while (count($statuses) == 0) {
+    $i = rand(0, count($friends) - 1);
+    $uid = $friends[$i]['uid'];
+    $answerUIDs[0] = $uid;
+    $answerNames[0] = htmlentities($friends[$i]['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
+    $statuses = $facebook->api(array(
+                            'method' => 'fql.query',
+                            'query' => 'SELECT message, like_info.like_count FROM status WHERE uid = ' . $uid,
+                            ));
+  }
+
   while (count($answerNames) < 4) {
     $i = rand(0, count($friends) - 1);
     $uid = $friends[$i]['uid'];
@@ -97,24 +116,19 @@ function getStatusQuestion($facebook) {
     }
   }
 
-  $answerUID = $answerUIDs[0];
-  $statuses = $facebook->api(array(
-                        'method' => 'fql.query',
-                        'query' => 'SELECT message, like_info.like_count FROM status WHERE uid = ' . $answerUID,
-                        ));
-
-  $question = "";
+  $bestStatus = "";
   $likeCount = 0;
   foreach ($statuses as $status) {
     $newCount = $status['like_info']['like_count'];
     if ($newCount > $likeCount) {
       $likeCount = $newCount;
-      $question = $status['message'];
+      $bestStatus = htmlentities($status['message'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
     }
   }
-  echo $answerNames[0];
-  echo "<br />";
-  echo $question;
+
+  $question = "Who posted " . $bestStatus;
+  $questionArr = array("question" => $question, "answersNames" => $answerNames, "answersUIDs" => $answerUIDs);
+  toJSON($questionArr, "status");
 
 }
 
@@ -145,7 +159,7 @@ function getBirthdayQuestion($facebook) {
   }
   $question = "Which of these friends was born in " . $questionMonth . "?";
   $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
-  toJSON($questionArr);
+  toJSON($questionArr, "birthday");
 }
 
 # given a two character string representing a month, returns a string with the name of the month
@@ -219,7 +233,8 @@ function getInterestsQuestion($facebook) {
 }
 
 # prints JSON from Array
-function toJSON($questionArr) {
+function toJSON($questionArr, $type = "") {
+  $question['question']['type'] = $type;
   $question['question']['question_text'] = $questionArr['question'];
   $question['question']['answers']['names'] = $questionArr['answersNames'];
   $question['question']['answers']['uids'] = $questionArr['answersUIDs'];

@@ -119,7 +119,7 @@ function getStatusQuestion($facebook) {
     }
   }
 
-  $question = "Who posted " . $bestStatus . "?";
+  $question = "Who posted " . $bestStatus;
   $questionArr = array("question" => $question, "answersNames" => $answerNames, "answersUIDs" => $answerUIDs);
   toJSON($questionArr);
 
@@ -186,7 +186,8 @@ function numToMonth($month) {
 }
 
 # prints JSON from Array
-function toJSON($questionArr) {
+function toJSON($questionArr, $type) {
+  $question['question']['type'] = $type;
   $question['question']['question_text'] = $questionArr['question'];
   $question['question']['answers']['names'] = $questionArr['answersNames'];
   $question['question']['answers']['uids'] = $questionArr['answersUIDs'];
