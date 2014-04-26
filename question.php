@@ -26,6 +26,10 @@ if ($user_id) {
                          'query' => 'SELECT uid1 FROM friend WHERE uid2=1648381117',
                      ));
     foreach ($friends as $friend) {
+      $nameOfFriend = $facebook->api(array(
+                         'method' => 'fql.query',
+                         'query' => "SELECT name FROM user WHERE uid=$friend",
+                     ));
       echo $friend . '\n';
     }
   } catch (FacebookApiException $e) {
