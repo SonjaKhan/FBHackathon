@@ -22,8 +22,7 @@ if ($user_id) {
                         'query' => 'SELECT uid1 FROM friend WHERE uid2=me()',
                         ));
 
-    # getHometownQuestion($facebook);
-    getStatusQuestion($facebook);
+    getHometownQuestion($facebook);
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
@@ -73,46 +72,6 @@ function getHometownQuestion($facebook) {
 
   $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
   toJSON($questionArr);
-}
-
-# Generates a status question
-function getStatusQuestion($facebook) {
-  $friends = $facebook->api(array(
-                        'method' => 'fql.query',
-                        'query' => 'SELECT name, uid FROM user WHERE uid in (SELECT uid1 FROM friend WHERE uid2 = me())',
-                        ));
-
-  $answerNames = array();
-  $answerUIDs = array();
-
-  while (count($answerNames) < 4) {
-    $i = rand(0, count($friends) - 1);
-    $uid = $friends[$i]['uid'];
-    if (!in_array($uid, $answersUIDs)) {
-      array_push($answerUIDs, $uid);
-      array_push($answerNames, htmlentities($friends[$i]['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8'));
-    }
-  }
-
-  $answerUID = $answerUIDs[0];
-  $statuses = $facebook->api(array(
-                        'method' => 'fql.query',
-                        'query' => 'SELECT message, like_info.like_count FROM status WHERE uid = ' . $answerUID,
-                        ));
-
-  $question = "";
-  $likeCount = 0;
-  foreach ($statuses as $status) {
-    $newCount = $status['like_info']['like_count'];
-    if ($newCount > $likeCount) {
-      $likeCount = $newCount;
-      $question = $status['message'];
-    }
-  }
-  echo $answerNames[0];
-  echo "<br />";
-  echo $question;
-
 }
 
 # prints JSON from Array
