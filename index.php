@@ -3,7 +3,7 @@
   <head>
     <title>Facebook Hack-a-thon</title>
     <link href="style.css" rel="stylesheet" type="text/css" media="all" />
-    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css' />
     <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="style.js"></script>
     <script src="questions.js"></script>
@@ -85,40 +85,40 @@
 
     <div id="content">
       <div id="question">
-        <span>Question #X:</span>
+        <span>Question #1:</span>
         <p>Which friend has been to <strong>Paris</strong>?</p>
       </div>
       <form action="/">
         <div id="answers">
           <ul class="layout-columns">
             <li>
-				<label>
-					<img src="https://graph.facebook.com/roee.avnon/picture?width=100&height=100" alt="image" />
-					<input type="radio" name="selection" value="0" />
-					<span>Roee Avnon</span>
-				</label>
-			</li>
+        <label>
+          <img src="https://graph.facebook.com/roee.avnon/picture?width=100&height=100" alt="image" />
+          <input type="radio" name="selection" value="0" />
+          <span>Roee Avnon</span>
+        </label>
+      </li>
             <li>
-				<label>
-					<img src="https://graph.facebook.com/sonja.khan.18/picture?width=100&height=100" alt="image" />
-					<input type="radio" name="selection" value="1" />
-					<span>Sonja Khan</span>
-				</label>
-			</li>
+        <label>
+          <img src="https://graph.facebook.com/sonja.khan.18/picture?width=100&height=100" alt="image" />
+          <input type="radio" name="selection" value="1" />
+          <span>Sonja Khan</span>
+        </label>
+      </li>
             <li>
-				<label>
-					<img src="https://graph.facebook.com/scriptreiter/picture?width=100&height=100" alt="image" />
-					<input type="radio" name="selection" value="2" />
-					<span>Nicholas Reiter</span>
-				</label>
-			</li>
+        <label>
+          <img src="https://graph.facebook.com/scriptreiter/picture?width=100&height=100" alt="image" />
+          <input type="radio" name="selection" value="2" />
+          <span>Nicholas Reiter</span>
+        </label>
+      </li>
             <li>
-				<label>
-					<img src="https://graph.facebook.com/colinjmiller93/picture?width=100&height=100" alt="image" />
-					<input type="radio" name="selection" value="3" />
-					<span>Colin Miller</span>
-				</label>
-			</li>
+        <label>
+          <img src="https://graph.facebook.com/colinjmiller93/picture?width=100&height=100" alt="image" />
+          <input type="radio" name="selection" value="3" />
+          <span>Colin Miller</span>
+        </label>
+      </li>
           </ul>
           <input type="submit" />
           <input id="next_question_button" type="button" value="Next Question" />
