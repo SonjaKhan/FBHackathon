@@ -31,7 +31,7 @@ if ($user_id) {
       getBirthdayQuestion($facebook);
     }
     # getInterestsQuestion($facebook);
-    
+
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
@@ -56,9 +56,9 @@ function getHometownQuestion($facebook) {
                         ));
 
   $i = rand(0, count($hometowns) - 1);
-  $questionCity = $hometowns[$i]['hometown_location']['city'];
-  $questionCountry = $hometowns[$i]['hometown_location']['country'];
-  $questionName = $hometowns[$i]['name'];
+  $questionCity = filterEncoding($hometowns[$i]['hometown_location']['city']);
+  $questionCountry = filterEncoding($hometowns[$i]['hometown_location']['country']);
+  $questionName = filterEncoding($hometowns[$i]['name']);
   $questionUID  = $hometowns[$i]['uid'];
 
   $answersNames = array($questionName);
@@ -66,12 +66,12 @@ function getHometownQuestion($facebook) {
 
   while (count($answersUIDs) < 4) {
     $i = rand(0, count($hometowns) - 1);
-    $newCity = $hometowns[$i]['hometown_location']['city'];
+    $newCity = filterEncoding($hometowns[$i]['hometown_location']['city']);
     if ($questionCity !== $newCity) {
       $newUID  = $hometowns[$i]['uid'];
       if (!in_array($newUID, $answersUIDs)) {
         array_push($answersUIDs, $newUID);
-        array_push($answersNames, htmlentities($hometowns[$i]['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8'));
+        array_push($answersNames, filterEncoding($hometowns[$i]['name']));
       }
     }
   }
@@ -100,7 +100,7 @@ function getStatusQuestion($facebook) {
     $i = rand(0, count($friends) - 1);
     $uid = $friends[$i]['uid'];
     $answerUIDs[0] = $uid;
-    $answerNames[0] = htmlentities($friends[$i]['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
+    $answerNames[0] = filterEncoding($friends[$i]['name']);
     $statuses = $facebook->api(array(
                             'method' => 'fql.query',
                             'query' => 'SELECT message, like_info.like_count FROM status WHERE uid = ' . $uid,
@@ -112,7 +112,7 @@ function getStatusQuestion($facebook) {
     $uid = $friends[$i]['uid'];
     if (!in_array($uid, $answersUIDs)) {
       array_push($answerUIDs, $uid);
-      array_push($answerNames, htmlentities($friends[$i]['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8'));
+      array_push($answerNames, filterEncoding($friends[$i]['name']));
     }
   }
 
@@ -122,7 +122,7 @@ function getStatusQuestion($facebook) {
     $newCount = $status['like_info']['like_count'];
     if ($newCount > $likeCount) {
       $likeCount = $newCount;
-      $bestStatus = htmlentities($status['message'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
+      $bestStatus = filterEncoding($status['message']);
     }
   }
 
@@ -139,7 +139,7 @@ function getBirthdayQuestion($facebook) {
                         'query' => 'SELECT name, uid, birthday_date FROM user WHERE birthday_date AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())'
                         ));
   $i = rand(0, count($birthdays) - 1);
-  $questionName = $birthdays[$i]['name'];
+  $questionName = filterEncoding($birthdays[$i]['name']);
   $questionUID = $birthdays[$i]['uid'];
   $questionMonth = numToMonth(substr($birthdays[$i]['birthday_date'], 0, 2));
 
@@ -153,7 +153,7 @@ function getBirthdayQuestion($facebook) {
       $newUID  = $birthdays[$i]['uid'];
       if (!in_array($newUID, $answersUIDs)) {
         array_push($answersUIDs, $newUID);
-        array_push($answersNames, htmlentities($birthdays[$i]['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8'));
+        array_push($answersNames, filterEncoding($birthdays[$i]['name']));
       }
     }
   }
@@ -239,6 +239,11 @@ function toJSON($questionArr, $type = "") {
   $question['question']['answers']['names'] = $questionArr['answersNames'];
   $question['question']['answers']['uids'] = $questionArr['answersUIDs'];
   echo json_encode($question);
+}
+
+# returns an html encoded string
+function filterEncoding($toEncode) {
+  return htmlentities($toEncode, ENT_COMPAT | ENT_HTML401, 'UTF-8');
 }
 
 ?>

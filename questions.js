@@ -8,6 +8,7 @@ $(window).load(function() {
   
   // Check this answer to see if it's correct
   function checkQuestion() {
+    $(this).addClass("selected");
     //e.preventDefault();
     //$("input[type=submit]").css("display", "none");
   
