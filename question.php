@@ -63,7 +63,9 @@ function getHometownQuestion($facebook) {
 
 # prints JSON from Array
 function toJSON($questionArr) {
-  print_r($questionArr)
+  $question['question']['question_text'] = $questionArr['question'];
+  $question['question']['answers'] = $questionArr['answers'];
+  echo json_encode($question, JSON_PRETTY_PRINT);
 }
 
 ?>
