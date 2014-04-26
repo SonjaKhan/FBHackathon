@@ -23,14 +23,17 @@ if ($user_id) {
     $namePrint = "Name: " . $user_profile['name'];
     $friends = $facebook->api(array(
                          'method' => 'fql.query',
-                         'query' => 'SELECT uid1 FROM friend WHERE uid2=1648381117',
+                         'query' => 'SELECT uid1 FROM friend WHERE uid2=me()',
                      ));
+    echo $friends
     foreach ($friends as $friend) {
-      $nameOfFriend = $facebook->api(array(
+
+      /*$nameOfFriend = $facebook->api(array(
                          'method' => 'fql.query',
-                         'query' => "SELECT name FROM user WHERE uid=$friend",
+                         'query' => "SELECT name FROM user WHERE uid=" . $friend . "",
                      ));
-      echo $friend . '\n';
+      echo $nameOfFriend . '\n';
+      */
     }
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
