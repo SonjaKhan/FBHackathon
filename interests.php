@@ -188,7 +188,7 @@ function getInterestsQuestion($facebook) {
   $questionUID = $interests[$i]['uid'];
   $questionInterests = $interests[$i]['interests'];
   echo "question interests: " . $questionInterests . "<br>";
-  $questionInterests = explode(', ', $questionInterests);
+  $questionInterests = explode(array(',', ' '), $questionInterests);
   echo "in an array: " . $questionInterests . "<br>";
   $j = rand(0, count($questionInterests) - 1);
   $questionInterest = $questionInterests[j];
@@ -219,6 +219,13 @@ function getInterestsQuestion($facebook) {
   $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
   toJSON($questionArr);
 }
+
+function multiexplode ($delimiters, $string) {  
+    $ready = str_replace($delimiters, $delimiters[0], $string);
+    $launch = explode($delimiters[0], $ready);
+    return  $launch;
+}
+
 
 # prints JSON from Array
 function toJSON($questionArr) {
