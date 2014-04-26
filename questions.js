@@ -29,7 +29,7 @@ $(window).load(function() {
     $("#question").append($("<span").html("Summary"));
 	$("#question").append($("<div>").attr("id", "finalPercent").html((score / (questionNumber - 1)) + "%"));
 	$("#question").append($("<p>").html("Of 15 questions about your friends, you got " + score + "!"));
-	$("#question").append($("<a>").attr.("id", "postScores").attr("src","#").html("Click here to share your score!"));
+	$("#question").append($("<a>").attr("id", "postScores").attr("src","#").html("Click here to share your score!"));
   }
 
   // Sends off an AJAX request to server to fetch the info
