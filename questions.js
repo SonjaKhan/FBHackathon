@@ -19,7 +19,7 @@ $(window).load(function() {
 	  $("label.selected").addClass("incorrect");
 	}
 	// Mark the correct answer
-	$("label.selected").addClass("incorrect");
+	$("label.selected").addClass("correct");
 	
 	$("#next_question_button").css("display", "block");
   }
