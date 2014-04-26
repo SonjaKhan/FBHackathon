@@ -15,6 +15,7 @@ $(window).load(function() {
 	  score++;
 	} else {
 	  // Incorrect answer
+	  console.log($("label.selected input").attr("value"));
 	  $("label.selected").addClass("incorrect");
 	}
 	// Mark the correct answer
