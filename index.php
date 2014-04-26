@@ -62,8 +62,7 @@
                   score: score
                 },
                 dataType: 'html',
-                success: scorePosted,
-                error: function(a, b, c) {alert('a: ' + a + ' b: ' + b + ' c: ' + c);}
+                success: scorePosted
               });
             }
           });
@@ -79,6 +78,7 @@
       }
 
       function scorePosted(data) {
+        console.log(data);
         $('#postScores').remove();
       }
 
