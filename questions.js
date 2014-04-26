@@ -64,7 +64,7 @@ $(window).load(function() {
     new Spinner(opts).spin(loaderDiv[0]);
 
     $.ajax({
-      url: 'temp.php',
+      url: 'question.php',
       dataType: 'json',
       success: displayNextQuestion
     });
