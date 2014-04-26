@@ -235,7 +235,7 @@ function getInterestsQuestion($facebook) {
 function getFriendCountQuestion($facebook) {
   $friends = $facebook->api(array(
                         'method' => 'fql.query',
-                        'query' => 'SELECT name, uid, mutual_friend_count FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me())'
+                        'query' => 'SELECT name, uid, mutual_friend_count FROM user WHERE uid in (SELECT uid1 FROM friend WHERE uid2 = me())'
                         ));
 
   $answersNames = array();
@@ -243,25 +243,34 @@ function getFriendCountQuestion($facebook) {
   $answersUIDs = array();
   $maxCount = 0;
 
-  $i = rand(0, count($friends) - 1);
   while (count($answersNames) < 4) {
-    $friend = $friends[i];
+    $i = rand(0, count($friends) - 1);
+    $friend = $friends[$i];
     $uid = $friend['uid'];
     if (!in_array($uid, $answersUIDs)) {
       $count = $friend['mutual_friend_count'];
       if (!in_array($count, $answersCounts)) {
-        $name = $friend['name'];
-        array_push($answersUIDs, $uid);
-        array_push($answersNames, $name);
-        array_push($answersCounts, $count);
+        $name = filterEncoding($friend['name']);
+        if ($count < $maxCount) {
+          array_push($answersUIDs, $uid);
+          array_push($answersNames, $name);
+          array_push($answersCounts, $count);
+        } else {
+          $maxCount = $count;
+          array_push($answersUIDs, $answersUIDs[0]);
+          array_push($answersNames, $answersNames[0]);
+          array_push($answersCounts, $answersCounts[0]);
+          $answersUIDs[0] = $uid;
+          $answersNames[0] = $name;
+          $answersCounts[0] = $count;
+        }
       }
     }
   }
-
   print_r($answersCounts);
-
-
-
+  $question = "With who of the following do you share the most friends?";
+  $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
+  toJSON($questionArr, "mutual");
 }
 
 # prints JSON from Array

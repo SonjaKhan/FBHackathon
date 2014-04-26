@@ -251,7 +251,7 @@ function getFriendCountQuestion($facebook) {
     if (!in_array($uid, $answersUIDs)) {
       $count = $friend['mutual_friend_count'];
       if (!in_array($count, $answersCounts)) {
-        $name = $friend['name'];
+        $name = filterEncoding($friend['name']);
         if ($count < $maxCount) {
           array_push($answersUIDs, $uid);
           array_push($answersNames, $name);
