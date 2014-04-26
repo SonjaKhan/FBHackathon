@@ -23,8 +23,8 @@ if ($user_id) {
                         ));
 
     # getHometownQuestion($facebook);
-    # getStatusQuestion($facebook);
-    getBirthdayQuestion($facebook);
+    getStatusQuestion($facebook);
+    #getBirthdayQuestion($facebook);
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
