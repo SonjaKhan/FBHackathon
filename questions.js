@@ -5,7 +5,7 @@ $(window).load(function() {
   $(document).on('click', '#next_question_button', fetchNextQuestion);
   $(document).on('click', '#begin a', beginQuestions);
   $(document).on('click', 'label', checkQuestion);
-  
+
   // Check this answer to see if it's correct
   function checkQuestion() {
     $(this).addClass("selected");
@@ -13,19 +13,19 @@ $(window).load(function() {
     //$("input[type=submit]").css("display", "none");
     gotIt = false;
     if ($("label.selected input").attr("value") == 0) {
-	  // They got the question correct! Hurah!
-	  score++;
-	  gotIt = true;
-	} else {
-	  // Incorrect answer
-	  console.log($("label.selected input").attr("value"));
-	  $("label.selected").addClass("incorrect");
-	}
-	// Mark the correct answer
-	$("label input[value=0]").parent().addClass("correct");
-	
-	window.setTimeout(fetchNextQuestion, (gotIt) ? 1500 : 2500);
-	//$("#next_question_button").css("display", "block");
+      // They got the question correct! Hurah!
+      score++;
+      gotIt = true;
+    } else {
+      // Incorrect answer
+      console.log($("label.selected input").attr("value"));
+      $("label.selected").addClass("incorrect");
+    }
+    // Mark the correct answer
+    $("label input[value=0]").parent().addClass("correct");
+
+    window.setTimeout(fetchNextQuestion, (gotIt) ? 1500 : 2500);
+    //$("#next_question_button").css("display", "block");
   }
 
   // Sends off an AJAX request to server to fetch the info
@@ -66,7 +66,7 @@ $(window).load(function() {
     new Spinner(opts).spin(loaderDiv[0]);
 
     $.ajax({
-      url: 'temp.php',
+      url: 'question.php',
       dataType: 'json',
       success: displayNextQuestion
     });
@@ -83,9 +83,14 @@ $(window).load(function() {
     $('#loader-div').remove();
 
     question = data.question;
-	//$("input[type=submit]").css("display", "block");
-	//$("#next_question_button").css("display", "none");
+    //$("input[type=submit]").css("display", "block");
+    //$("#next_question_button").css("display", "none");
     $("#question span").html("Question #" + questionNumber);
+
+    if(question.type == 'status') {
+      question.question_text = 'Who posted <blockquote>' + question.question_text.slice(11) + '</blockquote>';
+    }
+
     $("#question p").html(question.question_text);
 
     var indices = [];
