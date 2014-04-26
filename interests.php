@@ -181,7 +181,7 @@ function numToMonth($month) {
 function getInterestsQuestion($facebook) {
   $interests = $facebook->api(array(
                         'method' => 'fql.query',
-                        'query' => 'SELECT name, uid, interests FROM user WHERE music AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())'
+                        'query' => 'SELECT name, uid, interests FROM user WHERE interests AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())'
                         ));
   $i = rand(0, count($interests) - 1);
   $questionName = $interests[$i]['name'];
