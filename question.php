@@ -91,28 +91,28 @@ function getStatusQuestion($facebook) {
                         'query' => 'SELECT name, uid FROM user WHERE uid in (SELECT uid1 FROM friend WHERE uid2 = me())',
                         ));
 
-  $answerNames = array();
-  $answerUIDs = array();
+  $answersNames = array();
+  $answersUIDs = array();
 
   $statuses = array();
 
   while (count($statuses) == 0) {
     $i = rand(0, count($friends) - 1);
     $uid = $friends[$i]['uid'];
-    $answerUIDs[0] = $uid;
-    $answerNames[0] = filterEncoding($friends[$i]['name']);
+    $answersUIDs[0] = $uid;
+    $answersNames[0] = filterEncoding($friends[$i]['name']);
     $statuses = $facebook->api(array(
                             'method' => 'fql.query',
                             'query' => 'SELECT message, like_info.like_count FROM status WHERE uid = ' . $uid,
                             ));
   }
 
-  while (count($answerNames) < 4) {
+  while (count($answersNames) < 4) {
     $i = rand(0, count($friends) - 1);
     $uid = $friends[$i]['uid'];
     if (!in_array($uid, $answersUIDs)) {
-      array_push($answerUIDs, $uid);
-      array_push($answerNames, filterEncoding($friends[$i]['name']));
+      array_push($answersUIDs, $uid);
+      array_push($answersNames, filterEncoding($friends[$i]['name']));
     }
   }
 
@@ -127,7 +127,7 @@ function getStatusQuestion($facebook) {
   }
 
   $question = "Who posted " . $bestStatus;
-  $questionArr = array("question" => $question, "answersNames" => $answerNames, "answersUIDs" => $answerUIDs);
+  $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
   toJSON($questionArr, "status");
 
 }
