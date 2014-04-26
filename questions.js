@@ -44,6 +44,8 @@ $(window).load(function() {
 
   function displayNextQuestion(data) {
     question = data.question;
+	$("input[type=submit]").css("display", "block");
+	$("#next_question_button").css("display", "none");
     $("#question span").html("Question #" + questionNumber);
     $("#question p").html(question.question_text);
 
@@ -53,6 +55,7 @@ $(window).load(function() {
     }
 
     $("#answers ul li label").each(function(index) {
+	  $(this).removeClass();
       if(question.answers.uids) {
         var rand = Math.floor(Math.random() * indices.length);
         var newIndex = indices[rand];
