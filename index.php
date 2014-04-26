@@ -67,7 +67,7 @@
       Below we include the Login Button social plugin. This button uses the JavaScript SDK to
       present a graphical Login button that triggers the FB.login() function when clicked. -->
 
-    <fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+    <fb:login-button data-scop="friends" show-faces="true" width="200" max-rows="1"></fb:login-button>
 
     <div id="content" style="display:none;">
       Here's the main stuff for the page!!
