@@ -51,10 +51,21 @@ if ($user_id) {
 function getHometownQuestion($facebook) {
   $hometowns = $facebook->api(array(
                         'method' => 'fql.query',
-                        'query' => 'SELECT name, hometown_location.city FROM user WHERE hometown_location AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())',
+                        'query' => 'SELECT name, uid, hometown_location.city, hometown_location.country FROM user WHERE hometown_location AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())',
                         ));
+
   $i = rand(0, count($hometowns) - 1);
-  $questionHometown = $hometowns[$i]['hometown_location']['city'];
+
+  $hometownToPeople = array();
+  foreach ($hometowns as $hometown) {
+    $city = $hometown['hometown_location']['city'];
+    if (!array_key_exists($city, $hometownToPeople) {
+      array_push($hometownToPeople, array($city => array());
+    }
+    array_push($hometownToPeople[$city], $hometown['name'];
+  }
+  print_r($hometownToPeople);
+  $questionHometown = $hometowns[$i]['hometown_location']['city'] . " (" . $hometowns[$i]['hometown_location']['country'] . ")";
   $question = "Who is from " . $questionHometown . "?";
   $answers = array($hometowns[$i]['name'], "Sonja", "Colin", "Nick");
   $questionArr = array("question" => $question, "answers" => $answers);
