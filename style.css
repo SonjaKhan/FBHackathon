@@ -129,10 +129,6 @@ h1 {
 	font-size: 36pt; text-align: center;
 }
 
-input[type=submit], #next_question_button {
-	display: none;
-}
-
 #prompt {
 	width: 700px;
 	text-align: center;

@@ -9,8 +9,6 @@ $(window).load(function() {
   function checkQuestion(e) {
     e.preventDefault();
     $(this).addClass("selected");
-    //e.preventDefault();
-    //$("input[type=submit]").css("display", "none");
     gotIt = false;
     if ($("label.selected input").attr("value") == 0) {
       // They got the question correct! Hurah!
@@ -25,7 +23,6 @@ $(window).load(function() {
     $("label input[value=0]").parent().addClass("correct");
 
     window.setTimeout(fetchNextQuestion, (gotIt) ? 1500 : 2500);
-    //$("#next_question_button").css("display", "block");
   }
 
   // Sends off an AJAX request to server to fetch the info
@@ -83,8 +80,6 @@ $(window).load(function() {
     $('#loader-div').remove();
 
     question = data.question;
-    //$("input[type=submit]").css("display", "block");
-    //$("#next_question_button").css("display", "none");
     $("#question span").html("Question #" + questionNumber);
 
     if(question.type == 'status') {

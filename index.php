@@ -132,8 +132,6 @@
         </label>
       </li>
           </ul>
-          <input type="submit" />
-          <input id="next_question_button" type="button" value="Next Question" />
         </div>
       </form>
     </div>
