@@ -5,26 +5,27 @@ $(window).load(function() {
   $(document).on('click', '#next_question_button', fetchNextQuestion);
   $(document).on('click', '#begin a', beginQuestions);
   $(document).on('click', 'label', checkQuestion);
-  
+
   // Check this answer to see if it's correct
   function checkQuestion() {
     $(this).addClass("selected");
     //e.preventDefault();
     //$("input[type=submit]").css("display", "none");
-  
+    gotIt = false;
     if ($("label.selected input").attr("value") == 0) {
-    // They got the question correct! Hurah!
-    score++;
-  } else {
-    // Incorrect answer
-    console.log($("label.selected input").attr("value"));
-    $("label.selected").addClass("incorrect");
-  }
-  // Mark the correct answer
-  $("label input[value=0]").parent().addClass("correct");
-  
-  window.setTimeout(fetchNextQuestion, 1000);
-  //$("#next_question_button").css("display", "block");
+      // They got the question correct! Hurah!
+      score++;
+      gotIt = true;
+    } else {
+      // Incorrect answer
+      console.log($("label.selected input").attr("value"));
+      $("label.selected").addClass("incorrect");
+    }
+    // Mark the correct answer
+    $("label input[value=0]").parent().addClass("correct");
+
+    window.setTimeout(fetchNextQuestion, (gotIt) ? 1500 : 2500);
+    //$("#next_question_button").css("display", "block");
   }
 
   // Sends off an AJAX request to server to fetch the info
