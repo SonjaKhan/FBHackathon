@@ -244,9 +244,9 @@ function getFriendCountQuestion($facebook) {
   $answersUIDs = array();
   $maxCount = 0;
 
-  $i = rand(0, count($friends) - 1);
   while (count($answersNames) < 4) {
-    $friend = $friends[i];
+    $i = rand(0, count($friends) - 1);
+    $friend = $friends[$i];
     $uid = $friend['uid'];
     if (!in_array($uid, $answersUIDs)) {
       $count = $friend['mutual_friend_count'];
@@ -257,7 +257,6 @@ function getFriendCountQuestion($facebook) {
         array_push($answersCounts, $count);
       }
     }
-    $i = rand(0, count($friends) - 1);
   }
 
   print_r($answersCounts);
