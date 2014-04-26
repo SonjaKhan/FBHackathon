@@ -1,8 +1,27 @@
 $(window).load(function() {
   var questionNumber = 1;
+  var score = 0;
   // Click handler for the next question button
   $(document).on('click', '#next_question_button', fetchNextQuestion);
   $(document).on('click', '#begin a', beginQuestions);
+  $(document).on('click', 'input[type=submit], label.selected', checkQuestion);
+  
+  // Check this answer to see if it's correct
+  function checkQuestion() {
+    $("input[type=submit]").css("display", "none");
+  
+    if ($("label.selected input").attr("value") == 0) {
+	  // They got the question correct! Hurah!
+	  score++;
+	} else {
+	  // Incorrect answer
+	  $("label.selected").addClass("incorrect");
+	}
+	// Mark the correct answer
+	$("label.selected").addClass("incorrect");
+	
+	$("#next_question_button").css("display", "block");
+  }
 
   // Sends off an AJAX request to server to fetch the info
   // for the next question

@@ -5,7 +5,7 @@
 }
 	#answers input:not([type=radio]) {
 		width: 100%;
-		font-size: 2em;
+		font-size: 24pt;
 		font-family: 'Raleway', sans-serif;
 	}
 	#answers ul {
