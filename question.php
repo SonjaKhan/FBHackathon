@@ -195,9 +195,7 @@ function getInterestsQuestion($facebook) {
   while (count($answersUIDs) < 4) {
     $i = rand(0, count($interests) - 1);
     $newInterests = $interests[$i]['interests'];
-    $j = rand(0, count($newInterests) - 1);
-    $newInterest = $newInterests[$j];
-    if ($questionInterest !== $newInterest) {
+    if (!in_array($questionInterest, $newInterests)) {
       $newUID  = $interests[$i]['uid'];
       if (!in_array($newUID, $answersUIDs)) {
         array_push($answersUIDs, $newUID);
