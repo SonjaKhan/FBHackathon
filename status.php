@@ -109,20 +109,19 @@ function getStatusQuestion($facebook) {
     }
   }
 
-  $answerUID = $answerUIDs[0];
-
-  $question = "";
+  $bestStatus = "";
   $likeCount = 0;
   foreach ($statuses as $status) {
     $newCount = $status['like_info']['like_count'];
     if ($newCount > $likeCount) {
       $likeCount = $newCount;
-      $question = htmlentities($status['message'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
+      $bestStatus = htmlentities($status['message'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
     }
   }
-  echo $answerNames[0];
-  echo "<br />";
-  echo $question;
+
+  $question = "Who posted " . $bestStatus . "?";
+  $questionArr = array("question" => $question, "answersNames" => $answerNames, "answersUIDs" => $answerUIDs);
+  toJSON($questionArr);
 
 }
 
