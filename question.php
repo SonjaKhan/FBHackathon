@@ -70,7 +70,7 @@ function getHometownQuestion($facebook) {
       $newUID  = $hometowns[$i]['uid'];
       if (!in_array($newUID, $answersUIDs)) {
         array_push($answersUIDs, $newUID);
-        array_push($answersNames, $hometowns[$i]['name']);
+        array_push($answersNames, htmlentities($hometowns[$i]['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8'));
       }
     }
   }
@@ -85,7 +85,7 @@ function getHometownQuestion($facebook) {
 # prints JSON from Array
 function toJSON($questionArr) {
   $question['question']['question_text'] = $questionArr['question'];
-  $question['question']['answers']['names'] = htmlentities($questionArr['answersNames'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
+  $question['question']['answers']['names'] = $questionArr['answersNames'];
   $question['question']['answers']['uids'] = $questionArr['answersUIDs'];
   echo json_encode($question);
 }
