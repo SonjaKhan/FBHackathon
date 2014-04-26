@@ -4,7 +4,7 @@ $(window).load(function() {
   // Click handler for the next question button
   $(document).on('click', '#next_question_button', fetchNextQuestion);
   $(document).on('click', '#begin a', beginQuestions);
-  $(document).on('click', 'label.selected', checkQuestion);
+  $(document).on('click', 'label', checkQuestion);
   
   // Check this answer to see if it's correct
   function checkQuestion() {
@@ -22,7 +22,7 @@ $(window).load(function() {
 	// Mark the correct answer
 	$("label input[value=0]").parent().addClass("correct");
 	
-	windows.setTimeout(fetchNextQuestion, 1000);
+	window.setTimeout(fetchNextQuestion, 1000);
 	//$("#next_question_button").css("display", "block");
   }
 
