@@ -16,7 +16,7 @@
     $(document).on('click', '#login', function(e) {
       e.preventDefault();
       FB.login(function(){}, {scope: 'friends'});
-    }
+    });
 
     window.fbAsyncInit = function() {
       FB.init({
