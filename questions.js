@@ -10,7 +10,7 @@ $(window).load(function() {
     e.preventDefault();
 
     $.ajax({
-      url: 'temp_question.php',
+      url: 'temp.php',
       dataType: 'json',
       success: displayNextQuestion
     });
