@@ -60,7 +60,7 @@
                 url: 'post_score.php',
                 data: {
                   score: score,
-                  access_token: FB.getAuthResponse()['accessToken'];
+                  access_token: FB.getAuthResponse()['accessToken']
                 },
                 dataType: 'html',
                 success: scorePosted
