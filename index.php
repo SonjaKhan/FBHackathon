@@ -141,8 +141,8 @@
     </div>
     <div id="content">
       <div id="question">
-        <span>Question #1:</span>
-        <p>Which friend has been to <strong>Paris</strong>?</p>
+        <span>Question #0:</span>
+        <p>Do you know the team behind this app?</p>
       </div>
       <form action="/">
         <div id="answers">
