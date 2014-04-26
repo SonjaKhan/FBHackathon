@@ -21,16 +21,9 @@ if ($user_id) {
                         'method' => 'fql.query',
                         'query' => 'SELECT uid1 FROM friend WHERE uid2=me()',
                         ));
-    /*print_r($friends);
-    foreach ($friends as $friend) {
-      print_r($friend['uid1']);
-      /*$nameOfFriend = $facebook->api(array(
-                         'method' => 'fql.query',
-                         'query' => "SELECT name FROM user WHERE uid=" . $friend['uid1'] . "",
-                     ));
-      print_r($nameOfFriend);
-    }*/
-    getHometownQuestion($facebook);
+
+    # getHometownQuestion($facebook);
+    getStatusQuestion($facebook);
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
@@ -80,6 +73,17 @@ function getHometownQuestion($facebook) {
 
   $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
   toJSON($questionArr);
+}
+
+# Generates a status question
+function getStatusQuestion($facebook) {
+  $friends = $facebook->api(array(
+                        'method' => 'fql.query',
+                        'query' => 'SELECT uid2 FROM friend WHERE uid1 = me()',
+                        ));
+  $i = rand(0, count($friends) - 1);
+  $uid = $friends[$i]['uid2'];
+  echo $uid;
 }
 
 # prints JSON from Array
