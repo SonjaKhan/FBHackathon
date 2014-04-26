@@ -96,6 +96,7 @@ function getStatusQuestion($facebook) {
   $i = rand(0, count($friends) - 1);
   $uid = $friends[$i]['uid2'];
   echo $uid;
+}
 
 # generates a question about a friend's birthday month
 function getBirthdayQuestion($facebook) {
@@ -155,7 +156,7 @@ function numToMonth($month) {
       case "12":
         return "December";
   }
-}
+
 
 # prints JSON from Array
 function toJSON($questionArr) {
