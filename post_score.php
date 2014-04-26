@@ -19,7 +19,7 @@
       $ret_obj = $facebook->api('/me/feed', 'POST',
         array(
           'link' => 'https://apps.facebook.com/facebookfinal/',
-          'message' => "I just got a score of {$score} out of 15 for Facebook Flashcards!!"
+          'message' => "I just got a score of {$score} out of 15 for Facebook Flashcards!!",
         )
       );
     } catch (FacebookApiException $e) {
