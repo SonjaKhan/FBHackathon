@@ -21,7 +21,10 @@ if ($user_id) {
     // Proceed knowing you have a logged in user who's authenticated.
     $user_profile = $facebook->api('/me','GET');
     $namePrint = "Name: " . $user_profile['name'];
-    $friends = $facebook->api('/me/friends/name', 'GET');
+    $friends = $facebook->api(array(
+                         'method' => 'fql.query',
+                         'query' => 'SELECT uid1 FROM friend WHERE uid2=1648381117',
+                     ));
     foreach ($friends as $friend) {
       echo $friend . '\n';
     }
