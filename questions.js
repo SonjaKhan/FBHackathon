@@ -1,6 +1,6 @@
 $(window).load(function() {
   var questionNumber = 1;
-  var score = 0;
+  score = 0;
 
   $(document).on('click', '#begin a', beginQuestions);
   $(document).on('click', 'label', checkQuestion);
@@ -14,11 +14,11 @@ $(window).load(function() {
       // They got the question correct! Hurah!
       score++;
       gotIt = true;
-      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#E0FFE0, #E0FFE0)");
+      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#C0FFC0, #A0FFA0)");
     } else {
       // Incorrect answer
       $("label.selected").addClass("incorrect");
-      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#FFE0E0, #FFE0E0)");
+      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#FFC0C0, #FFA0A0)");
     }
     // Mark the correct answer
     $("label input[value=0]").parent().addClass("correct");
