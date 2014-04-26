@@ -62,21 +62,37 @@ function getHometownQuestion($facebook) {
     if (!array_key_exists($city, $hometownToPeople)) {
       $hometownToPeople[$city] = array();
     }
-    array_push($hometownToPeople[$city], $person['name']);
+    array_push($hometownToPeople[$city], $person['uid']);
   }
-  print_r($hometownToPeople);
-  $questionHometown = $hometowns[$i]['hometown_location']['city'] . " (" . $hometowns[$i]['hometown_location']['country'] . ")";
+  $questionCity = $hometowns[$i]['hometown_location']['city'];
+  $questionCountry = $hometowns[$i]['hometown_location']['country'];
+  $questionName = $hometowns[$i]['name'];
+  $questionUID  = $hometowns[$i]['uid'];
+
+  unset($hometownToPeople[$questionCity]);
+
+  $answersUID = array($questionUID);
+  for ($i = 0; $i < 3; $i++) {
+    $j = rand(0, count($hometownToPeople - 1));
+    $answerCity = $hometownToPeople[$j];
+    $k = rand(0, count($answerCity) - 1));
+    $answerPerson = $answerCity[$k];
+    push_array($answersUID, $answerPerson);
+  }
+
+  $questionHometown = $questionCity . " (" . $questionCountry . ")";
   $question = "Who is from " . $questionHometown . "?";
-  $answers = array($hometowns[$i]['name'], "Sonja", "Colin", "Nick");
-  $questionArr = array("question" => $question, "answers" => $answers);
-  toJSON($questionArr);
+
+  print_r($answersUID);
+  //$questionArr = array("question" => $question, "answersName" => $answersName, "answersUID" => $answersUID);
+  //toJSON($questionArr);
 }
 
 # prints JSON from Array
 function toJSON($questionArr) {
   $question['question']['question_text'] = $questionArr['question'];
   $question['question']['answers'] = $questionArr['answers'];
-  echo json_encode($question);
+  echo htmlentities(json_encode($question));
 }
 
 ?>
