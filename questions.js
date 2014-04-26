@@ -10,7 +10,7 @@ $(window).load(function() {
     e.preventDefault();
 
     $.ajax({
-      url: 'sample_question.php',
+      url: 'question.php',
       dataType: 'json',
       success: displayNextQuestion
     });
@@ -30,5 +30,7 @@ $(window).load(function() {
         $("<input>").attr("type", "radio").attr("name", "selection").attr("value", index)
       ).append(data.answers[index]);
     });
+
+    questionNumber++;
   }
 });
