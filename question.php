@@ -1,5 +1,4 @@
 <?php
-echo 'nothing done yet';
 require_once('php-sdk/facebook.php');
 
 $config = array(
@@ -8,9 +7,7 @@ $config = array(
   'fileUpload' => false, // optional
   'allowSignedRequest' => false, // optional, but should be set to false for non-canvas apps
 );
-echo 'Have not made fb object yet';
 $facebook = new Facebook($config);
-echo 'made fb object';
 
 // Get User ID
 $user_id = $facebook->getUser();
@@ -38,11 +35,12 @@ if ($user_id) {
                      ));
       print_r($nameOfFriend);
     }*/
+    echo count($hometown);
     $i = rand(0, count($hometown) - 1);
     echo "   " . $i . "   ";
     $hometown_keys = array_keys($hometown);
     echo $hometown_keys[$i]['person'] . "  ";
-    $hometown_keys['hometown_location']['city'];
+    //$hometown_keys['hometown_location'].city;
     /*foreach ($hometown as $person) {
       
       echo $person['name'];
