@@ -121,12 +121,59 @@ body {
 	font-family: 'Raleway', sans-serif;
 }
 
+#bottom {
+	height: 30px;
+}
+
 #content {
   display: none;
 }
 
+#finalPercent {
+	border-top: 2px solid black;
+	font-size: 50pt;
+	font-weight: bold;
+	margin-bottom: 20px;
+	margin-top: 5px;
+	padding-top: 20px;
+	text-align: center;
+}
+
 h1 {
 	font-size: 36pt; text-align: center;
+}
+
+#progressbar {
+	width: 600px;
+	margin: 0px auto;
+	border-radius: 5px;
+}
+
+#progressbar, .progressblock {
+	height: 20px;
+}
+
+.progressblock {
+	/*border: 1px black solid;*/
+	width: 38px;
+	float: left;
+	background: linear-gradient(#E0E0E0, #D0D0D0);
+
+}
+
+.progressblock:nth-child(even) {
+	border-left: 1px solid #C0C0C0;
+	border-right: 1px solid #C0C0C0;
+}
+
+.progressblock:first-child {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.progressblock:last-child {
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
 }
 
 #prompt {
@@ -143,6 +190,7 @@ h1 {
 	background: #fff;
 	border: 2px solid black;
 	margin: auto;
+	overflow: hidden;
 	padding: 20px;
 	width: 700px;
 }

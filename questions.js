@@ -14,15 +14,24 @@ $(window).load(function() {
       // They got the question correct! Hurah!
       score++;
       gotIt = true;
+      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#E0FFE0, #E0FFE0)");
     } else {
       // Incorrect answer
-      console.log($("label.selected input").attr("value"));
       $("label.selected").addClass("incorrect");
+      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#FFE0E0, #FFE0E0)");
     }
     // Mark the correct answer
     $("label input[value=0]").parent().addClass("correct");
-
-    window.setTimeout(fetchNextQuestion, (gotIt) ? 1500 : 2500);
+	window.setTimeout((questionNumber <= 15) ? fetchNextQuestion : displaySummary, (gotIt) ? 1500 : 2500);
+  }
+  
+  function displaySummary() {
+	$("#answers").css("display", "none");
+	$("#question").html("");
+    $("#question").append($("<span>").html("Summary"));
+	$("#question").append($("<div>").attr("id", "finalPercent").html((score / (questionNumber - 1)) + "%"));
+	$("#question").append($("<p>").html("Of 15 questions about your friends, you got " + score + "!"));
+	$("#question").append($("<a>").attr("id", "postScores").attr("src","#").html("Click here to share your score!"));
   }
 
   // Sends off an AJAX request to server to fetch the info
@@ -104,8 +113,6 @@ $(window).load(function() {
         $(this).append($("<span>").html(question.answers.names[newIndex]));
       }
     });
-
-	console.log("I am getting called! questionNumber = " + questionNumber);
     questionNumber++;
   }
 });
