@@ -3,22 +3,24 @@ $(window).load(function() {
   score = 0;
 
   $(document).on('click', '#begin a', beginQuestions);
-  $(document).on('click', 'label', checkQuestion);
+  $(document).on('click', 'label:not(.unselectable)', checkQuestion);
 
   // Check this answer to see if it's correct
   function checkQuestion(e) {
     e.preventDefault();
     $(this).addClass("selected");
+	$("label").addClass("unselectable");
+	console.log("called check");
     gotIt = false;
     if ($("label.selected input").attr("value") == 0) {
       // They got the question correct! Hurah!
       score++;
       gotIt = true;
-      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#E0FFE0, #C0FFC0)");
+      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#C0FFC0, #A0FFA0)");
     } else {
       // Incorrect answer
       $("label.selected").addClass("incorrect");
-      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#FFE0E0, #FFC0C0)");
+      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#FFC0C0, #FFA0A0)");
     }
     // Mark the correct answer
     $("label input[value=0]").parent().addClass("correct");
@@ -26,12 +28,13 @@ $(window).load(function() {
   }
   
   function displaySummary() {
-	$("#answers").css("display", "none");
+	$("#answers").html("");
 	$("#question").html("");
     $("#question").append($("<span>").html("Summary"));
-	$("#question").append($("<div>").attr("id", "finalPercent").html((score / (questionNumber - 1)) + "%"));
+	$("#question").append($("<div>").attr("id", "finalPercent").html("Total: " + Math.floor(score / (questionNumber - 1) * 100) + "%"));
 	$("#question").append($("<p>").html("Of 15 questions about your friends, you got " + score + "!"));
-	$("#question").append($("<a>").attr("id", "postScores").attr("href","#").html("Click here to share your score!"));
+	$("#question").append($("<a>").attr("id", "postScores").attr("href","#").html("Click here to share your score"));
+	$("#question").append($("<a>").attr("href","#").html("Click here to play again"));
   }
 
   // Sends off an AJAX request to server to fetch the info
