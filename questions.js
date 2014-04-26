@@ -61,7 +61,7 @@ $(window).load(function() {
       left: '50%' // Left position relative to parent
     };
 
-    new Spinner(opts).spin(loaderDiv);
+    new Spinner(opts).spin(loaderDiv[0]);
 
     $.ajax({
       url: 'temp.php',
