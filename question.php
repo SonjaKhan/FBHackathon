@@ -53,6 +53,7 @@ if ($user_id) {
   echo 'Please <a href="' . $login_url . '">login.</a>';
 }
 
+# Generates a question about hometowns
 function getHometownQuestion($facebook) {
   $hometowns = $facebook->api(array(
                         'method' => 'fql.query',
