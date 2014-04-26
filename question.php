@@ -31,11 +31,6 @@ if ($user_id) {
                      ));
       print_r($nameOfFriend);
     }*/
-  /*
-  $answers = array($hometown[$i]['name'], "Sonja", "Colin", "Nick");
-  $questionArr = array("question" => $question, "answers" => $answers);
-  toJSON($questionArr);
-  */
     getHometownQuestion($facebook);
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
@@ -69,9 +64,7 @@ function getHometownQuestion($facebook) {
 
 # prints JSON from Array
 function toJSON($questionArr) {
-  $question_to_json['question']['question_text'] = $questionArr['question'];
-  $question_to_json['question']['answers'] = $questionArr['answers'];
-  echo json_encode($question_to_json);
+  print_r($questionArr)
 }
 
 ?>
