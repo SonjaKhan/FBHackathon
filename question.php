@@ -269,7 +269,7 @@ function getFriendCountQuestion($facebook) {
       }
     }
   }
-  $question = "With who of the following do you share the most friends?";
+  $question = "With whom of the following do you share the most friends?";
   $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
   toJSON($questionArr, "mutual");
 }
