@@ -37,7 +37,7 @@ $(window).load(function() {
 
     loaderDiv.attr('id', 'loader-div');
 
-    $('body').appendChild(loaderDiv);
+    $('body').append(loaderDiv);
 
     var opts = {
       lines: 13, // The number of lines to draw
