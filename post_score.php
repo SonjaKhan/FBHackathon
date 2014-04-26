@@ -14,18 +14,12 @@
 
   $score = intval($_GET['score']);
   $access_token = $_GET['access_token'];
-  echo "Score: {$score}";
-  echo "Access token: {$access_token}";
-
-  echo $facebook->api("/me/permissions");
 
   if ($user_id) {
     try {
       $ret_obj = $facebook->api('/me/feed', 'POST',
         array(
-          'link' => 'https://apps.facebook.com/facebookfinal/',
-          'message' => "I just got a score of {$score} out of 15 for Facebook Flashcards!!",
-          'access_token' => $access_token
+          'message' => "I just got a score of {$score} out of 15 for Facebook Final!!"
         )
       );
     } catch (FacebookApiException $e) {
@@ -35,8 +29,6 @@
       // just ask the user to login again here.
       $login_url = $facebook->getLoginUrl(); 
       echo 'Please <a href="' . $login_url . '">login.</a>';
-      echo $e->getType();
-      echo $e->getMessage();
       error_log($e->getType());
       error_log($e->getMessage());
     }
