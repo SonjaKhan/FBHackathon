@@ -22,7 +22,7 @@ $(window).load(function() {
 	$("#answers ul li label").each(function(index) {
 		$(this).html(
 			$("<input>").attr("type", "radio").attr("name", "selection").attr("value", index)
-		).append(data.answers[index]));
+		).append(data.answers[index]);
 	});
   }
 });
