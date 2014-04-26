@@ -14,7 +14,7 @@ echo 'made fb object';
 
 // Get User ID
 $user_id = $facebook->getUser();
-echo $user_id . '\n';
+echo $user_id . "\r\n";
 
 if ($user_id) {
   try {
@@ -25,14 +25,14 @@ if ($user_id) {
                          'method' => 'fql.query',
                          'query' => 'SELECT uid1 FROM friend WHERE uid2=me()',
                      ));
-    echo $friends;
-    foreach ($friends as $friend) {
-      echo $friend . '\n';
+    print_r($friends);
+    foreach ($friends['data'] as $friend) {
+      echo $friend . "\r\n";
       /*$nameOfFriend = $facebook->api(array(
                          'method' => 'fql.query',
                          'query' => "SELECT name FROM user WHERE uid=" . $friend . "",
                      ));
-      echo $nameOfFriend . '\n';
+      echo $nameOfFriend . "\r\n";
       */
     }
   } catch (FacebookApiException $e) {
