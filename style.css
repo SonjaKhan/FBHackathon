@@ -1,6 +1,50 @@
-#question {
+#answers {
 	width: 700px;
-	border: 2px solid black;
 	margin: auto;
-	font-family: sans-serif;
+	padding: 20px;
 }
+	#answers ul {
+		list-style: none;
+		padding: 0;
+	}
+	
+		#answers ul li {
+			margin-top: 5px;
+			border: 1px solid black;
+		}
+		
+			#answers ul li input {
+				/*display: none;*/
+			}
+			#answers ul li label {
+				display: block;
+				background-color: #f5f5f5;
+			}
+			#answers ul li label:hover {
+				background-color: #fff;
+			}
+	
+
+body {
+	height: 100%;
+	background: #eeeeee;
+}
+
+#question {
+	background: #fff;
+	border: 2px solid black;
+	font-family: sans-serif;
+	margin: auto;
+	padding: 20px;
+	width: 700px;
+}
+	#question p {
+		font-size: 20pt;
+		font-style: italic;
+		margin: 0;
+		padding-left: 20px;
+	}
+	
+	#question span {
+		font-size: 3em;
+	}
