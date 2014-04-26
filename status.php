@@ -92,7 +92,7 @@ function getStatusQuestion($facebook) {
   while (count($statuses) == 0) {
     $i = rand(0, count($friends) - 1);
     $uid = $friends[$i]['uid'];
-    $answersUIDs[0] = $uid;
+    $answerUIDs[0] = $uid;
     $answerNames[0] = htmlentities($friends[$i]['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
     $statuses = $facebook->api(array(
                             'method' => 'fql.query',
