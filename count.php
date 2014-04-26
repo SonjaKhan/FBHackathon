@@ -236,7 +236,7 @@ function getInterestsQuestion($facebook) {
 function getFriendCountQuestion($facebook) {
   $friends = $facebook->api(array(
                         'method' => 'fql.query',
-                        'query' => 'SELECT name, uid, mutual_friend_count FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me())'
+                        'query' => 'SELECT name, uid, mutual_friend_count FROM user WHERE uid in (SELECT uid1 FROM friend WHERE uid2 = me())'
                         ));
 
   $answersNames = array();
@@ -257,6 +257,7 @@ function getFriendCountQuestion($facebook) {
         array_push($answersCounts, $count);
       }
     }
+    $i = rand(0, count($friends) - 1);
   }
 
   print_r($answersCounts);
