@@ -59,7 +59,8 @@
               $.ajax({
                 url: 'post_score.php',
                 data: {
-                  score: score
+                  score: score,
+                  access_token: FB.getAuthResponse()['accessToken'];
                 },
                 dataType: 'html',
                 success: scorePosted

@@ -13,7 +13,9 @@
   $user_id = $facebook->getUser();
 
   $score = intval($_GET['score']);
+  $access_token = $_GET['access_token'];
   echo "Score: {$score}";
+  echo "Access token: {$access_token}";
 
   echo $facebook->api("/me/permissions");
 
@@ -23,6 +25,7 @@
         array(
           'link' => 'https://apps.facebook.com/facebookfinal/',
           'message' => "I just got a score of {$score} out of 15 for Facebook Flashcards!!",
+          'access_token' => $access_token
         )
       );
     } catch (FacebookApiException $e) {
