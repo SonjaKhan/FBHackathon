@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Facebook Hack-a-thon</title>
+    <title>Facebook Final</title>
     <link href="style.css" rel="stylesheet" type="text/css" media="all" />
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css' />
     <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -118,7 +118,7 @@
     </script>
 
     <h1>
-      Facebook Flashcards
+      Facebook Final
     </h1>
     <div id="prompt">
       <div id="login">
@@ -126,7 +126,7 @@
           Please Login
         </a>
         <p>
-          Welcome! To play Facebook Flashcards, you'll need to log in to your Facebook account
+          Welcome! To take the Facebook Final, you'll need to log in to your Facebook account
           so we can grab information about your friends. Please click the link above to continue.
         </p>
       </div>
@@ -135,7 +135,8 @@
           Begin!
         </a>
         <p>
-          How well do you know your friends? Get ready to find out!
+          How well do you know your friends? Please put away your notes and books; the Facebook Final
+		  is about to begin.
         </p>
       </div>
     </div>
@@ -180,21 +181,21 @@
       </form>
       <div id="progress">
         <div id="progressbar">
-          <div class="progressblock" id="q1"></div>
-          <div class="progressblock" id="q2"></div>
-          <div class="progressblock" id="q3"></div>
-          <div class="progressblock" id="q4"></div>
-          <div class="progressblock" id="q5"></div>
-          <div class="progressblock" id="q6"></div>
-          <div class="progressblock" id="q7"></div>
-          <div class="progressblock" id="q8"></div>
-          <div class="progressblock" id="q9"></div>
-          <div class="progressblock" id="q10"></div>
-          <div class="progressblock" id="q11"></div>
-          <div class="progressblock" id="q12"></div>
-          <div class="progressblock" id="q13"></div>
-          <div class="progressblock" id="q14"></div>
-          <div class="progressblock" id="q15"></div>
+          <div class="progressblock"></div>
+          <div class="progressblock"></div>
+          <div class="progressblock"></div>
+          <div class="progressblock"></div>
+          <div class="progressblock"></div>
+          <div class="progressblock"></div>
+          <div class="progressblock"></div>
+          <div class="progressblock"></div>
+          <div class="progressblock"></div>
+          <div class="progressblock"></div>
+          <div class="progressblock"></div>
+          <div class="progressblock"></div>
+          <div class="progressblock"></div>
+          <div class="progressblock"></div>
+          <div class="progressblock"></div>
         </div>
         <div id="bottom">
         </div>
