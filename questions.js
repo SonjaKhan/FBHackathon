@@ -21,8 +21,13 @@ $(window).load(function() {
     }
     // Mark the correct answer
     $("label input[value=0]").parent().addClass("correct");
-
-    window.setTimeout(fetchNextQuestion, (gotIt) ? 1500 : 2500);
+	window.setTimeout((questionNumber < 3) ? fetchNextQuestion : displaySummary, (gotIt) ? 1500 : 2500);
+  }
+  
+  function displaySummary() {
+    $("#question span").html("Summary");
+	$("#question").append($("<div>").attr("id", "finalPercent").html((score / questionNumber) + "%"));
+	$("#question").append($("<p>").html("Of 15 questions about your friends, you got " + score + "!"));
   }
 
   // Sends off an AJAX request to server to fetch the info

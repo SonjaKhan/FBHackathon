@@ -125,6 +125,16 @@ body {
   display: none;
 }
 
+#finalPercent {
+	border-top: 2px solid black;
+	font-size: 50pt;
+	font-weight: bold;
+	margin-bottom: 20px;
+	margin-top: 5px;
+	padding-top: 20px;
+	text-align: center;
+}
+
 h1 {
 	font-size: 36pt; text-align: center;
 }
@@ -143,6 +153,7 @@ h1 {
 	background: #fff;
 	border: 2px solid black;
 	margin: auto;
+	overflow: hidden;
 	padding: 20px;
 	width: 700px;
 }
