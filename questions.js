@@ -23,6 +23,7 @@ $(window).load(function() {
   }
 
   function displayNextQuestion(data) {
+    alert(data);
     question = data.question;
     $("#question span").html("Question #" + questionNumber);
     $("#question p").html(question.question_text);
