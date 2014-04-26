@@ -1,4 +1,4 @@
-window.fbAsyncInit = function() {
+$(window).load(function() {
   FB.init({
     appId      : '649041091809661',
     status     : true, // check login status
@@ -19,15 +19,6 @@ window.fbAsyncInit = function() {
     }
   });
 };
-
-// Load the SDK asynchronously
-(function(d){
-  var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement('script'); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js";
-  ref.parentNode.insertBefore(js, ref);
-}(document));
 
 // Here we run a very simple test of the Graph API after login is successful. 
 // This testAPI() function is only called in those cases. 
