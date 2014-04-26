@@ -5,7 +5,9 @@
     <link href="style.css" rel="stylesheet" type="text/css" media="all" />
     <script src="https://code.jquery.com/jquery-1.11.0.min.js">
     </script>
-    <script src="fetch_next_question.js">
+    <script src="question.js">
+    </script>
+    <script src="fb_login.js">
     </script>
   </head>
 

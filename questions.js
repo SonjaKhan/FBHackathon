@@ -6,6 +6,16 @@ $(window).load(function() {
   // for the next question
   function fetchNextQuestion(e) {
     e.preventDefault();
-    alert('what');
+
+    $.ajax({
+      url: 'sample_question.php',
+      dataType: 'json',
+      success: displayNextQuestion
+    });
+  }
+
+  function displayNextQuestion(data) {
+    alert('got response!');
+    alert(data);
   }
 });
