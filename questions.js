@@ -1,4 +1,5 @@
 $(window).load(function() {
+  var questionNumber = 1;
   // Click handler for the next question button
   $(document).on('click', '#next_question_button', fetchNextQuestion);
 
@@ -15,7 +16,13 @@ $(window).load(function() {
   }
 
   function displayNextQuestion(data) {
-    alert('got response!');
     alert(data);
+	$("#question span").html("Question #" + questionNumber);
+	$("#question p").html(data.question_text);
+	$("#answers ul li label").each(function(index) {
+		$(this).html($("<label>").append(
+			$("<input>").attr("type", "radio").attr("name", "selection").attr("value", index);
+		).append(data.answers[index]));
+	});
   }
 });
