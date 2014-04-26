@@ -13,6 +13,11 @@
   <body>
     <div id="fb-root"></div>
     <script>
+    $(document).on('click', '#login', function(e) {
+      e.preventDefault();
+      FB.login(function(){}, {scope: 'friends'});
+    }
+
     window.fbAsyncInit = function() {
       FB.init({
         appId      : '649041091809661',
@@ -32,6 +37,12 @@
           // login status of the person. In this case, we're handling the situation where they 
           // have logged in to the app.
           $('#content').css('display', 'block');
+
+          $('#logout').click(function(e) {
+            e.preventDefault();
+            FB.logout();
+          });
+
         } else if (response.status === 'not_authorized') {
           // In this case, the person is logged into Facebook, but not into the app, so we call
           // FB.login() to prompt them to do so. 
@@ -63,13 +74,16 @@
 
     </script>
 
-    <!--
-      Below we include the Login Button social plugin. This button uses the JavaScript SDK to
-      present a graphical Login button that triggers the FB.login() function when clicked. -->
+    <a href="#" id="login">
+      Login
+    </a>
 
-    <fb:login-button data-scop="friends" show-faces="true" width="200" max-rows="1"></fb:login-button>
 
     <div id="content" style="display:none;">
+      <a href="#" id="logout">
+        Logout
+      </a>
+
       Here's the main stuff for the page!!
     </div>
   </body>
