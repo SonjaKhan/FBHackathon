@@ -3,12 +3,14 @@ $(window).load(function() {
   score = 0;
 
   $(document).on('click', '#begin a', beginQuestions);
-  $(document).on('click', 'label', checkQuestion);
+  $(document).on('click', 'label:not(.unselectable)', checkQuestion);
 
   // Check this answer to see if it's correct
   function checkQuestion(e) {
     e.preventDefault();
     $(this).addClass("selected");
+	$("label").addClass("unselectable");
+	console.log("called check");
     gotIt = false;
     if ($("label.selected input").attr("value") == 0) {
       // They got the question correct! Hurah!
