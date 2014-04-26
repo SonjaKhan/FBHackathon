@@ -31,9 +31,11 @@ $(window).load(function() {
 
     var loaderDiv = $(document.createElement('div'));
     loaderDiv.css('position', 'fixed');
+    loaderDiv.css('top', '0px');
+    loaderDiv.css('left', '0px');
     loaderDiv.css('width', '100%');
     loaderDiv.css('height', '100%');
-    loaderDiv.css('background', 'rgba(255, 255, 255, 0.1');
+    loaderDiv.css('background', 'rgba(255, 255, 255, 0.2');
 
     loaderDiv.attr('id', 'loader-div');
 
@@ -74,7 +76,7 @@ $(window).load(function() {
   }
 
   function displayNextQuestion(data) {
-    $('loader-div').remove();
+    //$('loader-div').remove();
 
     question = data.question;
     $("#question span").html("Question #" + questionNumber);
