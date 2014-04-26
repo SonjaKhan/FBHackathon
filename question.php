@@ -181,7 +181,7 @@ function numToMonth($month) {
         return "July";
       case "08":
         return "August";
-      case "00":
+      case "09":
         return "September";
       case "10":
         return "October";
