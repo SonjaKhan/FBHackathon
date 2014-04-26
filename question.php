@@ -22,10 +22,6 @@ if ($user_id) {
                         'method' => 'fql.query',
                         'query' => 'SELECT uid1 FROM friend WHERE uid2=me()',
                         ));
-    $hometown = $facebook->api(array(
-                        'method' => 'fql.query',
-                        'query' => 'SELECT name, hometown_location.city FROM user WHERE hometown_location AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())',
-                        ));
     /*print_r($friends);
     foreach ($friends as $friend) {
       print_r($friend['uid1']);
@@ -35,11 +31,7 @@ if ($user_id) {
                      ));
       print_r($nameOfFriend);
     }*/
-    print_r($hometown);
-    $i = rand(0, count($hometown) - 1);
-    echo "   " . $i . "   \n";
-    echo $hometown[$i]['name'] . "\n";
-    echo "   " . $hometown[$i]['hometown_location']['city'] . "\n";
+    getHometownQuestion($facebook);
     //$hometown['hometown_location'].city;
     /*foreach ($hometown as $person) {
       
@@ -66,6 +58,22 @@ if ($user_id) {
   echo 'Please <a href="' . $login_url . '">login.</a>';
 }
 
+function getHometownQuestion($facebook) {
+  $hometowns = $facebook->api(array(
+                        'method' => 'fql.query',
+                        'query' => 'SELECT name, hometown_location.city FROM user WHERE hometown_location AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())',
+                        ));
+  $i = rand(0, count($hometown) - 1);
+  $questionHometown = $hometown[$i]['hometown_location']['city'];
+  $question = "Who is from " . $questionHometown . "?";
+  $answers = array($hometown[$i]['name'], "Sonja", "Colin", "Nick");
+  $questionArr = array("question" => $question, "answers" => $answers);
+  toJSON($questionArr);
+}
+
+function toJSON($questionArr) {
+  print_r($questionArr)
+}
 
 ?>
 <!DOCTYPE HTML>
