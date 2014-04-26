@@ -33,7 +33,7 @@
 			vertical-align: middle;
 			width: 700px;
 		}
-		#answers ul.layout-rows li label:hover {
+		#answers ul.layout-rows li label:not(.correct):not(.incorrect):hover {
 			background-color: #fff;
 			border-color: black;
 			margin-left: 10px;
