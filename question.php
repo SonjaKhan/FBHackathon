@@ -11,7 +11,6 @@ $facebook = new Facebook($config);
 
 // Get User ID
 $user_id = $facebook->getUser();
-echo $user_id . "<br>";
 
 if ($user_id) {
   try {
@@ -70,11 +69,3 @@ function toJSON($questionArr) {
 }
 
 ?>
-<!DOCTYPE HTML>
-<head>
-<title>TEST</title>
-</head>
-<body>
-	<p>The user's name is: <?php echo $namePrint?></p>
-</body>
-</html>
