@@ -29,6 +29,7 @@ $(window).load(function() {
   function displaySummary() {
 	$("#answers").html("");
 	$("#question").html("");
+	$("#question").css("text-align", "center");
     $("#question").append($("<span>").html("Summary"));
 	$("#question").append($("<div>").attr("id", "finalPercent").html("Total: " + Math.floor(score / (questionNumber - 1) * 100) + "%"));
 	$("#question").append($("<p>").html("Of 15 questions about your friends, you got " + score + "!"));
