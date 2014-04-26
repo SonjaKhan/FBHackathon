@@ -1,7 +1,8 @@
 <?php
 
-
-	$file=fopen("scores.txt","r+");
-	file_put_contents($file, "TEST STRING", FILE_APPEND);
+	$file = "scores.txt";
+	$string = "TEST STRING";
+	file_put_contents($file, $string, FILE_APPEND);
+	echo $string;
 
 ?>
