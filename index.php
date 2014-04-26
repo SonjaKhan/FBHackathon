@@ -27,6 +27,7 @@
         });
 
         FB.Event.subscribe('auth.authResponseChange', checkLoginStatus);
+        $(document).on('click', '#postScores', getPostPermissions);
       };
 
       // Load the SDK asynchronously
@@ -38,6 +39,46 @@
         ref.parentNode.insertBefore(js, ref);
       }(document));
 
+      function getPostPermissions(e) {
+        e.preventDefault();
+        FB.Event.unsubscribe('auth.authResponseChange', checkLoginStatus);
+        FB.Event.subscribe('auth.authResponseChange', checkPostPermissions);
+
+        FB.login(function(){}, {scope: 'publish_actions'});
+      }
+
+      function checkPostPermissions(response) {
+        if (response.status === 'connected') {
+          console.log('connected');
+          FB.api('/me/permissions', function (response) {
+            var perms = response.data[0];
+            if(perms['publish_actions']) {
+              console.log('Publish permissions are granted.');
+              $.ajax({
+                url: 'post_score.php',
+                data: {
+                  score: score
+                },
+                dataType: 'html',
+                success: scorePosted
+              });
+            }
+          });
+
+        } else if (response.status === 'not_authorized') {
+          console.log('not_auth');
+        } else {
+          console.log('else');
+        }
+
+        FB.Event.unsubscribe('auth.authResponseChange', checkPostPermissions);
+        FB.Event.subscribe('auth.authResponseChange', checkLoginStatus);
+      }
+
+      function scorePosted(data) {
+        alert(data);
+      }
+
       function checkLoginStatus(response) {
         if (response.status === 'connected') {
           console.log('connected');
@@ -45,7 +86,8 @@
           // login status of the person. In this case, we're handling the situation where they 
           // have logged in to the app.
           FB.api('/me/permissions', function (response) {
-            if(response.data[0]['user_interests'] == 1) {
+            var perms = response.data[0];
+            if(perms['user_interests'] == 1 && perms['user_hometown'] == 1 && perms['friends_hometown'] == 1 && perms['user_birthday'] == 1 && perms['friends_birthday'] == 1 && perms['user_status'] == 1 && perms['friends_status'] == 1 && perms['friends_interests'] == 1) {
               console.log('Permissions are granted.');
               $('#begin').css('display', 'block');
               $('#login').css('display', 'none');
