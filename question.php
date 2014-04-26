@@ -53,9 +53,6 @@ function getHometownQuestion($facebook) {
                         'method' => 'fql.query',
                         'query' => 'SELECT name, uid, hometown_location.city, hometown_location.country FROM user WHERE hometown_location AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())',
                         ));
-  for($i=0;$i<count($hometowns);$i++) {
-    echo htmlentities($hometowns[$i]['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
-  }
 
   $i = rand(0, count($hometowns) - 1);
   $questionCity = $hometowns[$i]['hometown_location']['city'];
