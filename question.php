@@ -24,7 +24,8 @@ if ($user_id) {
 
     # getHometownQuestion($facebook);
     # getStatusQuestion($facebook);
-    getBirthdayQuestion($facebook);
+    # getBirthdayQuestion($facebook);
+    getInterestsQuestion($facebook);
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
@@ -175,6 +176,38 @@ function numToMonth($month) {
       case "12":
         return "December";
   }
+}
+
+function getInterestsQuestion($facebook) {
+  $interests = $facebook->api(array(
+                        'method' => 'fql.query',
+                        'query' => 'SELECT name, uid, interests FROM user WHERE music AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())'
+                        ));
+  $i = rand(0, count($interests) - 1);
+  $questionName = $interests[$i]['name'];
+  $questionUID = $interests[$i]['uid'];
+  $j = rand(0, count($interests[$i]['interests']) - 1);
+  $questionInterest = $interests[$i]['interests'][$j];
+
+  $answersNames = array($questionName);
+  $answersUIDs = array($questionUID);
+
+  while (count($answersUIDs) < 4) {
+    $i = rand(0, count($interests) - 1);
+    $newInterests = $interests[$i]['interests'];
+    $j = rand(0, count($newInterests) - 1);
+    $newInterest = $newInterests[$j];
+    if ($questionInterest !== $newInterest) {
+      $newUID  = $interests[$i]['uid'];
+      if (!in_array($newUID, $answersUIDs)) {
+        array_push($answersUIDs, $newUID);
+        array_push($answersNames, htmlentities($interests[$i]['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8'));
+      }
+    }
+  }
+  $question = "Who is interested in " . $questionInterest . "?";
+  $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
+  toJSON($questionArr);
 }
 
 # prints JSON from Array
