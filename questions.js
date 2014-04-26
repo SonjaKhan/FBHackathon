@@ -7,6 +7,7 @@ $(window).load(function() {
   // Sends off an AJAX request to server to fetch the info
   // for the next question
   function fetchNextQuestion(e) {
+    alert('what');
     e.preventDefault();
 
     $.ajax({
