@@ -105,6 +105,7 @@ $(window).load(function() {
       }
     });
 
+	console.log("I am getting called! questionNumber = " + questionNumber);
     questionNumber++;
   }
 });
