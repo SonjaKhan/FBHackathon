@@ -1,3 +1,11 @@
+#content {
+  display: none;
+}
+
+#begin {
+  display: none;
+}
+
 #answers {
 	width: 700px;
 	margin: auto;
