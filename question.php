@@ -23,7 +23,18 @@ if ($user_id) {
                         ));
 
     # getHometownQuestion($facebook);
-    getStatusQuestion($facebook);
+    # getStatusQuestion($facebook);
+    getBirthdayQuestion($facebook);
+    /*print_r($friends);
+    foreach ($friends as $friend) {
+      print_r($friend['uid1']);
+      /*$nameOfFriend = $facebook->api(array(
+                         'method' => 'fql.query',
+                         'query' => "SELECT name FROM user WHERE uid=" . $friend['uid1'] . "",
+                     ));
+      print_r($nameOfFriend);
+    }*/
+    # getHometownQuestion($facebook);
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
@@ -75,6 +86,7 @@ function getHometownQuestion($facebook) {
   toJSON($questionArr);
 }
 
+
 # Generates a status question
 function getStatusQuestion($facebook) {
   $friends = $facebook->api(array(
@@ -84,6 +96,65 @@ function getStatusQuestion($facebook) {
   $i = rand(0, count($friends) - 1);
   $uid = $friends[$i]['uid2'];
   echo $uid;
+
+# generates a question about a friend's birthday month
+function getBirthdayQuestion($facebook) {
+  $birthdays = $facebook->api(array(
+                        'method' => 'fql.query',
+                        'query' => 'SELECT name, uid, birthday_date FROM user WHERE birthday_date AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())'
+                        ));
+  $i = rand(0, count($birthdays) - 1);
+  $questionName = $birthdays[$i]['name'];
+  $questionUID = $birthdays[$i]['uid'];
+  $questionMonth = numToMonth(substr($birthdays[$i]['birthday_date'], 0, 2));
+
+  $answersNames = array($questionName);
+  $answersUIDs = array($questionUID);
+
+  while (count($answersUIDs) < 4) {
+    $i = rand(0, count($birthdays) - 1);
+    $newMonth = numToMonth(substr($birthdays[$i]['birthday_date'], 0, 2));
+    if ($questionMonth !== $newMonth) {
+      $newUID  = $birthdays[$i]['uid'];
+      if (!in_array($newUID, $answersUIDs)) {
+        array_push($answersUIDs, $newUID);
+        array_push($answersNames, htmlentities($birthdays[$i]['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8'));
+      }
+    }
+  }
+  $question = "Which of these friends was born in " . $questionMonth . "?";
+  $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
+  toJSON($questionArr);
+}
+
+# given a two character string representing a month, returns a string with the name of the month
+function numToMonth($month) {
+  switch ($month) {
+      case "01":
+        return "January";
+      case "02":
+        return "February";
+      case "03":
+        return "March";
+      case "04":
+        return "April";
+      case "05":
+        return "May";
+      case "06":
+        return "June";
+      case "07":
+        return "July";
+      case "08":
+        return "August";
+      case "00":
+        return "September";
+      case "10":
+        return "October";
+      case "11":
+        return "November";
+      case "12":
+        return "December";
+  }
 }
 
 # prints JSON from Array
