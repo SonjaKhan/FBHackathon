@@ -26,7 +26,7 @@ $(window).load(function() {
   function displaySummary() {
 	$("#answers").attr("display", "none");
 	$("#question").html("");
-    $("#question").append($("<span").html("Summary"));
+    $("#question").append($("<span>").html("Summary"));
 	$("#question").append($("<div>").attr("id", "finalPercent").html((score / (questionNumber - 1)) + "%"));
 	$("#question").append($("<p>").html("Of 15 questions about your friends, you got " + score + "!"));
 	$("#question").append($("<a>").attr("id", "postScores").attr("src","#").html("Click here to share your score!"));
