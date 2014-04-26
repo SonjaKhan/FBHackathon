@@ -77,7 +77,7 @@ $(window).load(function() {
   }
 
   function displayNextQuestion(data) {
-    $('loader-div').remove();
+    $('#loader-div').remove();
 
     question = data.question;
   $("input[type=submit]").css("display", "block");
