@@ -27,12 +27,12 @@ if ($user_id) {
                      ));
     print_r($friends);
     foreach ($friends as $friend) {
-      //echo $friend . "\r\n";
-      $nameOfFriend = $facebook->api(array(
+      print_r($friend['uid1']);
+      /*$nameOfFriend = $facebook->api(array(
                          'method' => 'fql.query',
                          'query' => "SELECT name FROM user WHERE uid=" . $friend['uid1'] . "",
                      ));
-      print_r($nameOfFriend);
+      print_r($nameOfFriend);*/
     }
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
