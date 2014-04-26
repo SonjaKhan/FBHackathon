@@ -20,7 +20,7 @@ $(window).load(function() {
 	$("#question span").html("Question #" + questionNumber);
 	$("#question p").html(data.question_text);
 	$("#answers ul li label").each(function(index) {
-		$(this).html($("<label>").append(
+		$(this).html(
 			$("<input>").attr("type", "radio").attr("name", "selection").attr("value", index)
 		).append(data.answers[index]));
 	});
