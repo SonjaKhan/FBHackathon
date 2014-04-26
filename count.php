@@ -22,16 +22,17 @@ if ($user_id) {
                         'query' => 'SELECT uid1 FROM friend WHERE uid2=me()',
                         ));
 
-    $type = rand(0, 3);
-    if ($type == 0) {
-      getHometownQuestion($facebook);
-    } else if ($type == 1) {
-      getStatusQuestion($facebook);
-    } else if ($type == 2) {
-      getBirthdayQuestion($facebook);
-    } else {
-      getInterestsQuestion($facebook);
-    }
+    // $type = rand(0, 3);
+    // if ($type == 0) {
+    //   getHometownQuestion($facebook);
+    // } else if ($type == 1) {
+    //   getStatusQuestion($facebook);
+    // } else if ($type == 2) {
+    //   getBirthdayQuestion($facebook);
+    // } else {
+    //   getInterestsQuestion($facebook);
+    // }
+    getFriendCountQuestion($facebook);
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
