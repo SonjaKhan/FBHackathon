@@ -192,15 +192,15 @@ function getInterestsQuestion($facebook) {
   echo "in an array: " . $questionInterests . "<br>";
   $j = rand(0, count($questionInterests) - 1);
   $questionInterest = $questionInterests[j];
-
+  echo "question interest: " . $questionInterest;
   $answersNames = array($questionName);
   $answersUIDs = array($questionUID);
-
+  /*
   $newInterests = $interests[0]['interests'];
   echo $newInterests . "<br>";
   $newInterests = explode(', ', $newInterests);
   print_r($newInterests);
-  /*
+  */
   while (count($answersUIDs) < 4) {
     $i = rand(0, count($interests) - 1);
     $newInterests = $interests[$i]['interests'];
@@ -214,7 +214,7 @@ function getInterestsQuestion($facebook) {
       }
     }
   }
-  */
+  
   $question = "Who is interested in " . $questionInterest . "?";
   $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
   toJSON($questionArr);
