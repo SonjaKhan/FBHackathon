@@ -29,6 +29,37 @@ $(window).load(function() {
   function fetchNextQuestion(e) {
     e.preventDefault();
 
+    var loaderDiv = $(document.createElement('div'));
+    loaderDiv.css('position', 'fixed');
+    loaderDiv.css('width', '100%');
+    loaderDiv.css('height', '100%');
+    loaderDiv.css('background', 'rgba(255, 255, 255, 0.1');
+
+    loaderDiv.attr('id', 'loader-div');
+
+    $('body').appendChild(loaderDiv);
+
+    var opts = {
+      lines: 13, // The number of lines to draw
+      length: 20, // The length of each line
+      width: 10, // The line thickness
+      radius: 30, // The radius of the inner circle
+      corners: 1, // Corner roundness (0..1)
+      rotate: 0, // The rotation offset
+      direction: 1, // 1: clockwise, -1: counterclockwise
+      color: '#000', // #rgb or #rrggbb or array of colors
+      speed: 1, // Rounds per second
+      trail: 60, // Afterglow percentage
+      shadow: false, // Whether to render a shadow
+      hwaccel: false, // Whether to use hardware acceleration
+      className: 'spinner', // The CSS class to assign to the spinner
+      zIndex: 2e9, // The z-index (defaults to 2000000000)
+      top: '50%', // Top position relative to parent
+      left: '50%' // Left position relative to parent
+    };
+
+    new Spinner(opts).spin(loaderDiv);
+
     $.ajax({
       url: 'temp.php',
       dataType: 'json',
@@ -43,6 +74,8 @@ $(window).load(function() {
   }
 
   function displayNextQuestion(data) {
+    $('loader-div').remove();
+
     question = data.question;
     $("#question span").html("Question #" + questionNumber);
     $("#question p").html(question.question_text);
