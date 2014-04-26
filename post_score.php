@@ -12,12 +12,14 @@ $facebook = new Facebook($config);
 // Get User ID
 $user_id = $facebook->getUser();
 
+$score = intval($_GET['score']);
+
 if ($user_id) {
   try {
     $ret_obj = $facebook->api('/me/feed', 'POST',
       array(
-        'link' => 'http://www.google.com',
-        'message' => 'This is a test post from our Hackathon App!!!'
+        'link' => 'https://apps.facebook.com/coolplacetogettoknow/',
+        'message' => "I just got a score of {$score} out of 15 for Facebook Flashcards!!"
       )
     );
   } catch (FacebookApiException $e) {
