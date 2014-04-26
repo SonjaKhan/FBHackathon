@@ -13,23 +13,19 @@
   <body>
     <div id="fb-root"></div>
     <script>
-    $(document).on('click', '#login', function(e) {
-      e.preventDefault();
-    });
-
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '649041091809661',
-          status     : true, // check login status
-          cookie     : true, // enable cookies to allow the server to access the session
-          xfbml      : true  // parse XFBML
+      $(document).on('click', '#login', function(e) {
+        e.preventDefault();
       });
 
-      // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
-      // for any authentication related change, such as login, logout or session refresh. This means that
-      // whenever someone who was previously logged out tries to log in again, the correct case below 
-      // will be handled. 
-      FB.Event.subscribe('auth.authResponseChange', checkLoginStatus);
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '649041091809661',
+            status     : true, // check login status
+            cookie     : true, // enable cookies to allow the server to access the session
+            xfbml      : true  // parse XFBML
+        });
+
+        FB.Event.subscribe('auth.authResponseChange', checkLoginStatus);
       };
 
       // Load the SDK asynchronously
@@ -43,13 +39,23 @@
 
       function checkLoginStatus(response) {
         if (response.status === 'connected') {
+          console.log('connected');
           // The response object is returned with a status field that lets the app know the current
           // login status of the person. In this case, we're handling the situation where they 
           // have logged in to the app.
-          $('#content').css('display', 'block');
-          $('#login').css('display', 'none');
+          FB.api('/me/permissions', function (response) {
+            if(response.data[0]['user_hometown'] != 1) {
+              console.log('Requesting further permissions.');
+              FB.login(function(){}, {scope:'user_hometown,friends_hometown'});
+            } else {
+              console.log('Permissions are granted.');
+              $('#content').css('display', 'block');
+              $('#login').css('display', 'none');
+            }
+          });
 
         } else if (response.status === 'not_authorized') {
+          console.log('not_auth');
           // In this case, the person is logged into Facebook, but not into the app, so we call
           // FB.login() to prompt them to do so. 
           // In real-life usage, you wouldn't want to immediately prompt someone to login 
@@ -59,6 +65,7 @@
           // (2) it is a bad experience to be continually prompted to login upon page load.
           FB.login(function(){}, {scope:'user_hometown,friends_hometown'});
         } else {
+          console.log('else');
           // In this case, the person is not logged into Facebook, so we call the login() 
           // function to prompt them to do so. Note that at this stage there is no indication
           // of whether they are logged into the app. If they aren't then they'll see the Login
