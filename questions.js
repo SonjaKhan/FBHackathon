@@ -6,7 +6,9 @@ $(window).load(function() {
   $(document).on('click', 'label', checkQuestion);
 
   // Check this answer to see if it's correct
-  function checkQuestion() {
+  function checkQuestion(e) {
+    e.preventDefault();
+    console.log(this);
     $(this).addClass("selected");
     //e.preventDefault();
     //$("input[type=submit]").css("display", "none");
@@ -23,8 +25,7 @@ $(window).load(function() {
     // Mark the correct answer
     $("label input[value=0]").parent().addClass("correct");
 
-    fetchNextQuestion();
-    //window.setTimeout(fetchNextQuestion, (gotIt) ? 1500 : 2500);
+    window.setTimeout(fetchNextQuestion, (gotIt) ? 1500 : 2500);
     //$("#next_question_button").css("display", "block");
   }
 
