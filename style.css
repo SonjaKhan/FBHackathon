@@ -114,6 +114,19 @@
 #begin, #login {
 	font-size: 24pt;
 }
+
+#begin a, #login a {
+	background: linear-gradient(#7179F5, #585FCC);
+	border: 1px solid black;
+	border-radius: 10px;
+	color: white;
+	padding: 5px 30px 5px 30px;
+	text-decoration: none;
+	transition: all 0.5 ease;
+}
+#begin a:hover, #login a:hover {
+	background: linear-gradient(#7A83FF, #585FCC);
+}
 	
 body {
 	height: 100%;
