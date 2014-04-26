@@ -33,8 +33,10 @@ $(window).load(function() {
     $("#question").append($("<span>").html("Summary"));
 	$("#question").append($("<div>").attr("id", "finalPercent").html("Total: " + Math.floor(score / (questionNumber - 1) * 100) + "%"));
 	$("#question").append($("<p>").html("Of 15 questions about your friends, you got " + score + "!"));
-	$("#question").append($("<a>").attr("id", "postScores").attr("href","#").html("Click here to share your score"));
+	$("#question").append($("<a>").attr("id", "postScores").attr("href","#").html("Share on FB"));
 	$("#question").append($("<a>").attr("href","index.php").html("Click here to play again"));
+  $("#question").append($("<a>").attr("href","index.php").html("Share on G+"));
+
   }
 
   // Sends off an AJAX request to server to fetch the info
