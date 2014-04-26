@@ -11,7 +11,7 @@ $facebook = new Facebook($config);
 
 // Get User ID
 $user_id = $facebook->getUser();
-echo $user_id . "\r\n";
+echo $user_id . "<br>";
 
 if ($user_id) {
   try {
@@ -38,6 +38,7 @@ if ($user_id) {
   $i = rand(0, count($hometown) - 1);
   $questionHometown = $hometown[$i]['hometown_location']['city'];
   $question = "Who is from " . $questionHometown . "?";
+  echo $question . "<br>";
   /*
   $answers = array($hometown[$i]['name'], "Sonja", "Colin", "Nick");
   $questionArr = array("question" => $question, "answers" => $answers);
