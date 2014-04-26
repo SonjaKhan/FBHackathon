@@ -7,7 +7,8 @@ $(window).load(function() {
   $(document).on('click', 'input[type=submit], label.selected', checkQuestion);
   
   // Check this answer to see if it's correct
-  function checkQuestion() {
+  function checkQuestion(e) {
+    e.preventDefault();
     $("input[type=submit]").css("display", "none");
   
     if ($("label.selected input").attr("value") == 0) {
