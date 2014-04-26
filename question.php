@@ -22,7 +22,9 @@ if ($user_id) {
     $user_profile = $facebook->api('/me','GET');
     $namePrint = "Name: " . $user_profile['name'];
     $friends = $facebook->api('/me/friends/name', 'GET');
-    echo $friends;
+    foreach ($friends as $friend) {
+      echo $friend . '\n';
+    }
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
