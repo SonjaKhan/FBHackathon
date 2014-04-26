@@ -166,6 +166,16 @@ h1 {
 	border-right: 1px solid #C0C0C0;
 }
 
+.progressblock:first-child {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.progressblock:last-child {
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
 #prompt {
 	width: 700px;
 	text-align: center;
@@ -174,16 +184,6 @@ h1 {
 	padding: 20px;
 	border: 2px solid black;
 	font-size: 17pt;
-}
-
-#q1 {
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-}
-
-#q15 {
-	border-bottom-right-radius: 5px;
-	border-top-right-radius: 5px;
 }
 
 #question {
