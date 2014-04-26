@@ -14,13 +14,15 @@ echo 'made fb object';
 
 // Get User ID
 $user_id = $facebook->getUser();
-echo $user_id;
+echo $user_id . '\n';
 
 if ($user_id) {
   try {
     // Proceed knowing you have a logged in user who's authenticated.
     $user_profile = $facebook->api('/me','GET');
     $namePrint = "Name: " . $user_profile['name'];
+    $friends = $facebook->api('/me/friends/name', 'GET');
+    echo $friends;
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
