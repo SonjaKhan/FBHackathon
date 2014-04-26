@@ -44,6 +44,6 @@ if ($user_id) {
 <title>TEST</title>
 </head>
 <body>
-	<p><?php echo $namePrint?></p>
+	<p>The user's name is: <?php echo $namePrint?></p>
 </body>
 </html>
