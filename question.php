@@ -77,7 +77,7 @@ function getHometownQuestion($facebook) {
     $answerCity = $hometownToPeople[$j];
     $k = rand(0, count($answerCity) - 1);
     $answerPerson = $answerCity[$k];
-    push_array($answersUID, $answerPerson);
+    array_push($answersUID, $answerPerson);
   }
 
   $questionHometown = $questionCity . " (" . $questionCountry . ")";
