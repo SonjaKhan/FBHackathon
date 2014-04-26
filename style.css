@@ -204,3 +204,21 @@ h1 {
 	#question span {
 		font-size: 3em;
 	}
+	
+	#question a {
+		background: linear-gradient(#7179F5, #585FCC);
+		border: 1px solid black;
+		border-radius: 5px;
+		color: white;
+		display: inline-block;
+		margin-left: 20px;
+		margin-top: 10px;
+		padding: 10px;
+		text-align: center;
+		text-decoration: none;
+		transition: all 0.5s ease;
+		width: 300px;
+	}
+	#question a:hover {
+		background: linear-gradient(#7A83FF, #585FCC);
+	}
