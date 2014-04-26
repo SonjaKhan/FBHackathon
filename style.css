@@ -121,6 +121,10 @@ body {
 	font-family: 'Raleway', sans-serif;
 }
 
+#bottom {
+	height: 30px;
+}
+
 #content {
   display: none;
 }
@@ -139,6 +143,29 @@ h1 {
 	font-size: 36pt; text-align: center;
 }
 
+#progressbar {
+	width: 600px;
+	margin: 0px auto;
+	border-radius: 5px;
+}
+
+#progressbar, .progressblock {
+	height: 20px;
+}
+
+.progressblock {
+	/*border: 1px black solid;*/
+	width: 38px;
+	float: left;
+	background: linear-gradient(#E0E0E0, #D0D0D0);
+
+}
+
+.progressblock:nth-child(even) {
+	border-left: 1px solid #C0C0C0;
+	border-right: 1px solid #C0C0C0;
+}
+
 #prompt {
 	width: 700px;
 	text-align: center;
@@ -147,6 +174,16 @@ h1 {
 	padding: 20px;
 	border: 2px solid black;
 	font-size: 17pt;
+}
+
+#q1 {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+#q15 {
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
 }
 
 #question {
