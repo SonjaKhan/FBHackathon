@@ -13,7 +13,8 @@ $(window).load(function() {
     $.ajax({
       url: 'question.php',
       dataType: 'json',
-      success: displayNextQuestion
+      success: displayNextQuestion,
+      failure: function() {alert('hmm...');}
     });
   }
 
