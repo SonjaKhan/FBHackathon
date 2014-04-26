@@ -2,7 +2,7 @@ $(window).load(function() {
   var questionNumber = 1;
   // Click handler for the next question button
   $(document).on('click', '#next_question_button', fetchNextQuestion);
-  $(document).on('click', '#begin', beginQuestions);
+  $(document).on('click', '#begin a', beginQuestions);
 
   // Sends off an AJAX request to server to fetch the info
   // for the next question
@@ -17,7 +17,7 @@ $(window).load(function() {
   }
 
   function beginQuestions(e) {
-    $('#begin').css('display', 'none');
+    $('#prompt').css('display', 'none');
     $('#content').css('display', 'block');
     fetchNextQuestion(e);
   }

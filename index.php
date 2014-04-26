@@ -11,7 +11,7 @@
   <body>
     <div id="fb-root"></div>
     <script>
-      $(document).on('click', '#login', function(e) {
+      $(document).on('click', '#login a', function(e) {
         e.preventDefault();
         FB.login(function(){}, {scope:'user_hometown,friends_hometown'});
       });
@@ -72,17 +72,27 @@
     </script>
 
     <h1>
-      Super Awesome App
+      Facebook Flashcards
     </h1>
-
-    <a href="#" id="login">
-      Please Login
-    </a>
-
-    <a href="#" id="begin">
-      Begin!
-    </a>
-
+    <div id="prompt">
+      <div id="login">
+        <a href="#">
+          Please Login
+        </a>
+        <p>
+          Welcome! To play Facebook Flashcards, you'll need to log in to your Facebook account
+          so we can grab information about your friends. Please click the link above to continue.
+        </p>
+      </div>
+      <div id="begin">
+        <a href="#">
+          Begin!
+        </a>
+        <p>
+          How well do you know your friends? Get ready to find out!
+        </p>
+      </div>
+    </div>
     <div id="content">
       <div id="question">
         <span>Question #1:</span>
