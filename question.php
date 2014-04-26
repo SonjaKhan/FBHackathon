@@ -57,12 +57,12 @@ function getHometownQuestion($facebook) {
   $i = rand(0, count($hometowns) - 1);
 
   $hometownToPeople = array();
-  foreach ($hometowns as $hometown) {
-    $city = $hometown['hometown_location']['city'];
+  foreach ($hometowns as $person) {
+    $city = $person['hometown_location']['city'];
     if (!array_key_exists($city, $hometownToPeople)) {
-      array_push($hometownToPeople, array($city => array());
+      $hometownToPeople[$city] = array();
     }
-    array_push($hometownToPeople[$city], $hometown['name'];
+    array_push($hometownToPeople[$city], $person['name']);
   }
   print_r($hometownToPeople);
   $questionHometown = $hometowns[$i]['hometown_location']['city'] . " (" . $hometowns[$i]['hometown_location']['country'] . ")";
