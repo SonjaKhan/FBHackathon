@@ -55,48 +55,39 @@ function getHometownQuestion($facebook) {
                         ));
 
   $i = rand(0, count($hometowns) - 1);
-
-  $hometownToPeople = array();
-  foreach ($hometowns as $person) {
-    $city = $person['hometown_location']['city'];
-    if (!array_key_exists($city, $hometownToPeople)) {
-      $hometownToPeople[$city] = array();
-    }
-    array_push($hometownToPeople[$city], $person['uid']);
-  }
   $questionCity = $hometowns[$i]['hometown_location']['city'];
   $questionCountry = $hometowns[$i]['hometown_location']['country'];
   $questionName = $hometowns[$i]['name'];
   $questionUID  = $hometowns[$i]['uid'];
 
-  unset($hometownToPeople[$questionCity]);
+  $answersNames = array($questionName);
+  $answersUIDs = array($questionUID);
 
-  $answersUID = array($questionUID);
-  for ($i = 0; $i < 3; $i++) {
-    $j = rand(0, count($hometownToPeople) - 1);
-    $randomCity = array_rand($hometownToPeople);
-    echo $randomCity;
-    echo "<br>";
-    print_r($hometownToPeople[$randomCity]);
-    echo "<br>";
-
-    $randomUIDInCity = array_rand($hometownToPeople[$randomCity]);
-    array_push($answersUID, $randomUIDInCity);
+  while (count($answersUIDs) < 4) {
+    $i = rand(0, count($hometowns) - 1);
+    $newCity = $hometowns[$i]['hometown_location']['city'];
+    if ($questionCity !== $newCity) {
+      $newUID  = $hometowns[$i]['uid'];
+      if (!in_array($newUID, $answersUIDs)) {
+        array_push($answersUIDs, $newUID);
+        array_push($answersNames, htmlentities($hometowns[$i]['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8'));
+      }
+    }
   }
 
   $questionHometown = $questionCity . " (" . $questionCountry . ")";
   $question = "Who is from " . $questionHometown . "?";
-  echo "<br>";
-  print_r($answersUID);
-  //$questionArr = array("question" => $question, "answersName" => $answersName, "answersUID" => $answersUID);
-  //toJSON($questionArr);
+
+  $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
+  toJSON($questionArr);
 }
 
 # prints JSON from Array
 function toJSON($questionArr) {
   $question['question']['question_text'] = $questionArr['question'];
-  $question['question']['answers'] = $questionArr['answers'];
-  echo htmlentities(json_encode($question));
+  $question['question']['answers']['names'] = $questionArr['answersNames'];
+  $question['question']['answers']['uids'] = $questionArr['answersUIDs'];
+  echo json_encode($question);
 }
 
 ?>
