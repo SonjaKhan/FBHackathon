@@ -32,9 +32,11 @@ $(window).load(function() {
 
     var loaderDiv = $(document.createElement('div'));
     loaderDiv.css('position', 'fixed');
+    loaderDiv.css('top', '0px');
+    loaderDiv.css('left', '0px');
     loaderDiv.css('width', '100%');
     loaderDiv.css('height', '100%');
-    loaderDiv.css('background', 'rgba(255, 255, 255, 0.1');
+    loaderDiv.css('background', 'rgba(255, 255, 255, 0.7');
 
     loaderDiv.attr('id', 'loader-div');
 
@@ -59,7 +61,7 @@ $(window).load(function() {
       left: '50%' // Left position relative to parent
     };
 
-    new Spinner(opts).spin(loaderDiv);
+    new Spinner(opts).spin(loaderDiv[0]);
 
     $.ajax({
       url: 'temp.php',
@@ -76,7 +78,7 @@ $(window).load(function() {
   }
 
   function displayNextQuestion(data) {
-    $('loader-div').remove();
+    $('#loader-div').remove();
 
     question = data.question;
 	//$("input[type=submit]").css("display", "block");
@@ -90,7 +92,7 @@ $(window).load(function() {
     }
 
     $("#answers ul li label").each(function(index) {
-	  $(this).removeClass();
+    $(this).removeClass();
       if(question.answers.uids) {
         var rand = Math.floor(Math.random() * indices.length);
         var newIndex = indices[rand];

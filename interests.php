@@ -181,28 +181,38 @@ function numToMonth($month) {
 function getInterestsQuestion($facebook) {
   $interests = $facebook->api(array(
                         'method' => 'fql.query',
-                        'query' => 'SELECT name, uid, interests FROM user WHERE music AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())'
+                        'query' => 'SELECT name, uid, interests FROM user WHERE interests AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())'
                         ));
   $i = rand(0, count($interests) - 1);
   $questionName = $interests[$i]['name'];
   $questionUID = $interests[$i]['uid'];
-  $questionInterest = $interests[$i]['interests'];
-  $questionInterest = explode(', ', $newInterests);
-   $j = rand(0, count($questionInterest) - 1);
-  $questionInterest = $questionInterest[j];
-
+  $questionInterests = $interests[$i]['interests'];
+  echo "question interests: " . $questionInterests . "<br>";
+  $questionInterests = explode(',', $questionInterests);
+  foreach ($questionInterests as $interest) {
+    $interest = trim($interest);
+  }
+  echo "in an array: ";
+  print_r($questionInterests);
+  echo "<br>";
+  $j = rand(0, count($questionInterests) - 1);
+  $questionInterest = $questionInterests[j];
+  echo "question interest: " . $questionInterest;
   $answersNames = array($questionName);
   $answersUIDs = array($questionUID);
-
+  /*
   $newInterests = $interests[0]['interests'];
   echo $newInterests . "<br>";
   $newInterests = explode(', ', $newInterests);
   print_r($newInterests);
-  /*
+  */
   while (count($answersUIDs) < 4) {
     $i = rand(0, count($interests) - 1);
     $newInterests = $interests[$i]['interests'];
-    $newInterests = explode(', ', $newInterests);
+    $questionInterests = explode(',', $questionInterests);
+    foreach ($newInterests as $interest) {
+      $interest = trim($interest);
+    }
     print_r($newInterests);
     if (!in_array($questionInterest, $newInterests)) {
       $newUID  = $interests[$i]['uid'];
@@ -212,11 +222,18 @@ function getInterestsQuestion($facebook) {
       }
     }
   }
-  */
+  
   $question = "Who is interested in " . $questionInterest . "?";
   $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
   toJSON($questionArr);
 }
+
+function multiexplode ($delimiters, $string) {  
+    $ready = str_replace($delimiters, $delimiters[0], $string);
+    $launch = explode($delimiters[0], $ready);
+    return  $launch;
+}
+
 
 # prints JSON from Array
 function toJSON($questionArr) {
