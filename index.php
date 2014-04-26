@@ -78,7 +78,7 @@
       }
 
       function scorePosted(data) {
-        alert(data);
+        $('#postScores').remove();
       }
 
       function checkLoginStatus(response) {
