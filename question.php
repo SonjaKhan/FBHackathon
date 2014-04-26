@@ -196,6 +196,7 @@ function getInterestsQuestion($facebook) {
     $i = rand(0, count($interests) - 1);
     $newInterests = $interests[$i]['interests'];
     $newInterests = explode(', ', $newInterests);
+    print_r($newInterests);
     if (!in_array($questionInterest, $newInterests)) {
       $newUID  = $interests[$i]['uid'];
       if (!in_array($newUID, $answersUIDs)) {
