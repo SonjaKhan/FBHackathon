@@ -40,6 +40,7 @@
       }(document));
 
       function getPostPermissions(e) {
+        console.log('getPostPermissions');
         e.preventDefault();
         FB.Event.unsubscribe('auth.authResponseChange', checkLoginStatus);
         FB.Event.subscribe('auth.authResponseChange', checkPostPermissions);
@@ -48,6 +49,7 @@
       }
 
       function checkPostPermissions(response) {
+        console.log('checkingPostPermissions');
         if (response.status === 'connected') {
           console.log('connected');
           FB.api('/me/permissions', function (response) {
