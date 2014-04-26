@@ -25,13 +25,16 @@ if ($user_id) {
                          'method' => 'fql.query',
                          'query' => 'SELECT uid1 FROM friend WHERE uid2=me()',
                      ));
-    /*foreach ($friends as $friend) {
-      $nameOfFriend = $facebook->api(array(
+    echo $friends
+    foreach ($friends as $friend) {
+
+      /*$nameOfFriend = $facebook->api(array(
                          'method' => 'fql.query',
                          'query' => "SELECT name FROM user WHERE uid=" . $friend . "",
                      ));
-      echo $friend . '\n';
-    }*/
+      echo $nameOfFriend . '\n';
+      */
+    }
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
