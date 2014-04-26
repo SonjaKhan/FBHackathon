@@ -11,10 +11,11 @@ $(window).load(function() {
     $(this).addClass("selected");
     //e.preventDefault();
     //$("input[type=submit]").css("display", "none");
-  
+    gotIt = false;
     if ($("label.selected input").attr("value") == 0) {
 	  // They got the question correct! Hurah!
 	  score++;
+	  gotIt = true;
 	} else {
 	  // Incorrect answer
 	  console.log($("label.selected input").attr("value"));
@@ -23,7 +24,7 @@ $(window).load(function() {
 	// Mark the correct answer
 	$("label input[value=0]").parent().addClass("correct");
 	
-	window.setTimeout(fetchNextQuestion, 1000);
+	window.setTimeout(fetchNextQuestion, (gotIt) ? 1500 : 2500);
 	//$("#next_question_button").css("display", "block");
   }
 
