@@ -28,7 +28,7 @@ if ($user_id) {
     echo $friends;
     foreach ($friends['data'] as $friend) {
       echo $friend . "\r\n";
-      $nameOfFriend = $facebook->api(array(
+      /*$nameOfFriend = $facebook->api(array(
                          'method' => 'fql.query',
                          'query' => "SELECT name FROM user WHERE uid=" . $friend . "",
                      ));
