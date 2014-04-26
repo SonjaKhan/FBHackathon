@@ -7,7 +7,8 @@ $(window).load(function() {
   $(document).on('click', 'input[type=submit], label.selected', checkQuestion);
   
   // Check this answer to see if it's correct
-  function checkQuestion() {
+  function checkQuestion(e) {
+    e.preventDefault();
     $("input[type=submit]").css("display", "none");
   
     if ($("label.selected input").attr("value") == 0) {
@@ -79,6 +80,8 @@ $(window).load(function() {
     //$('loader-div').remove();
 
     question = data.question;
+	$("input[type=submit]").css("display", "block");
+	$("#next_question_button").css("display", "none");
     $("#question span").html("Question #" + questionNumber);
     $("#question p").html(question.question_text);
 
@@ -88,6 +91,7 @@ $(window).load(function() {
     }
 
     $("#answers ul li label").each(function(index) {
+	  $(this).removeClass();
       if(question.answers.uids) {
         var rand = Math.floor(Math.random() * indices.length);
         var newIndex = indices[rand];

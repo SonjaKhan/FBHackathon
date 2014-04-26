@@ -22,16 +22,10 @@ if ($user_id) {
                         'query' => 'SELECT uid1 FROM friend WHERE uid2=me()',
                         ));
 
-    $type = rand(0, 2);
-    if ($type == 0) {
-      getHometownQuestion($facebook);
-    } else if ($type == 1) {
-      getStatusQuestion($facebook);
-    } else {
-      getBirthdayQuestion($facebook);
-    }
-    # getInterestsQuestion($facebook);
-    
+    # getHometownQuestion($facebook);
+    # getStatusQuestion($facebook);
+    # getBirthdayQuestion($facebook);
+    getInterestsQuestion($facebook);
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
@@ -80,7 +74,7 @@ function getHometownQuestion($facebook) {
   $question = "Who is from " . $questionHometown . "?";
 
   $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
-  toJSON($questionArr, "hometown");
+  toJSON($questionArr);
 }
 
 
@@ -94,19 +88,6 @@ function getStatusQuestion($facebook) {
   $answerNames = array();
   $answerUIDs = array();
 
-  $statuses = array();
-
-  while (count($statuses) == 0) {
-    $i = rand(0, count($friends) - 1);
-    $uid = $friends[$i]['uid'];
-    $answerUIDs[0] = $uid;
-    $answerNames[0] = htmlentities($friends[$i]['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
-    $statuses = $facebook->api(array(
-                            'method' => 'fql.query',
-                            'query' => 'SELECT message, like_info.like_count FROM status WHERE uid = ' . $uid,
-                            ));
-  }
-
   while (count($answerNames) < 4) {
     $i = rand(0, count($friends) - 1);
     $uid = $friends[$i]['uid'];
@@ -116,19 +97,24 @@ function getStatusQuestion($facebook) {
     }
   }
 
-  $bestStatus = "";
+  $answerUID = $answerUIDs[0];
+  $statuses = $facebook->api(array(
+                        'method' => 'fql.query',
+                        'query' => 'SELECT message, like_info.like_count FROM status WHERE uid = ' . $answerUID,
+                        ));
+
+  $question = "";
   $likeCount = 0;
   foreach ($statuses as $status) {
     $newCount = $status['like_info']['like_count'];
     if ($newCount > $likeCount) {
       $likeCount = $newCount;
-      $bestStatus = htmlentities($status['message'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
+      $question = $status['message'];
     }
   }
-
-  $question = "Who posted " . $bestStatus;
-  $questionArr = array("question" => $question, "answersNames" => $answerNames, "answersUIDs" => $answerUIDs);
-  toJSON($questionArr, "status");
+  echo $answerNames[0];
+  echo "<br />";
+  echo $question;
 
 }
 
@@ -159,7 +145,7 @@ function getBirthdayQuestion($facebook) {
   }
   $question = "Which of these friends was born in " . $questionMonth . "?";
   $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
-  toJSON($questionArr, "birthday");
+  toJSON($questionArr);
 }
 
 # given a two character string representing a month, returns a string with the name of the month
@@ -201,8 +187,10 @@ function getInterestsQuestion($facebook) {
   $questionName = $interests[$i]['name'];
   $questionUID = $interests[$i]['uid'];
   $questionInterest = $interests[$i]['interests'];
+  echo "question interests: " . $questionInterests . "<br>";
   $questionInterest = explode(', ', $newInterests);
-   $j = rand(0, count($questionInterest) - 1);
+  echo "in an array: " . $questionInterests . "<br>";
+  $j = rand(0, count($questionInterest) - 1);
   $questionInterest = $questionInterest[j];
 
   $answersNames = array($questionName);
@@ -233,8 +221,7 @@ function getInterestsQuestion($facebook) {
 }
 
 # prints JSON from Array
-function toJSON($questionArr, $type = "") {
-  $question['question']['type'] = $type;
+function toJSON($questionArr) {
   $question['question']['question_text'] = $questionArr['question'];
   $question['question']['answers']['names'] = $questionArr['answersNames'];
   $question['question']['answers']['uids'] = $questionArr['answersUIDs'];
