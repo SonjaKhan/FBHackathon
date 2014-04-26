@@ -12,18 +12,18 @@ $(window).load(function() {
     //$("input[type=submit]").css("display", "none");
   
     if ($("label.selected input").attr("value") == 0) {
-	  // They got the question correct! Hurah!
-	  score++;
-	} else {
-	  // Incorrect answer
-	  console.log($("label.selected input").attr("value"));
-	  $("label.selected").addClass("incorrect");
-	}
-	// Mark the correct answer
-	$("label input[value=0]").parent().addClass("correct");
-	
-	window.setTimeout(fetchNextQuestion, 1000);
-	//$("#next_question_button").css("display", "block");
+    // They got the question correct! Hurah!
+    score++;
+  } else {
+    // Incorrect answer
+    console.log($("label.selected input").attr("value"));
+    $("label.selected").addClass("incorrect");
+  }
+  // Mark the correct answer
+  $("label input[value=0]").parent().addClass("correct");
+  
+  window.setTimeout(fetchNextQuestion, 1000);
+  //$("#next_question_button").css("display", "block");
   }
 
   // Sends off an AJAX request to server to fetch the info
@@ -81,9 +81,14 @@ $(window).load(function() {
     $('#loader-div').remove();
 
     question = data.question;
-	//$("input[type=submit]").css("display", "block");
-	//$("#next_question_button").css("display", "none");
+    //$("input[type=submit]").css("display", "block");
+    //$("#next_question_button").css("display", "none");
     $("#question span").html("Question #" + questionNumber);
+
+    if(question.type == 'status') {
+      question.question_text = 'Who posted <blockquote>' + question.question_text.slice(11) + '</blockquote>';
+    }
+
     $("#question p").html(question.question_text);
 
     var indices = [];
