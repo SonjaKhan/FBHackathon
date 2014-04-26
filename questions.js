@@ -20,7 +20,7 @@ $(window).load(function() {
     }
     // Mark the correct answer
     $("label input[value=0]").parent().addClass("correct");
-	window.setTimeout((questionNumber <= 3) ? fetchNextQuestion : displaySummary, (gotIt) ? 1500 : 2500);
+	window.setTimeout((questionNumber <= 15) ? fetchNextQuestion : displaySummary, (gotIt) ? 1500 : 2500);
   }
   
   function displaySummary() {
