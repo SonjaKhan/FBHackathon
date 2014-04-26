@@ -35,7 +35,7 @@ if ($user_id) {
                      ));
       print_r($nameOfFriend);
     }*/
-    echo count($hometown);
+    print_r($hometown);
     $i = rand(0, count($hometown) - 1);
     echo "   " . $i . "   ";
     $hometown_keys = array_keys($hometown);
