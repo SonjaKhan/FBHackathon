@@ -22,12 +22,12 @@ if ($user_id) {
                         'query' => 'SELECT uid1 FROM friend WHERE uid2=me()',
                         ));
 
-    $type = rand(0, 3);
-    if ($type == 0) {
+    $type = rand(0, 7);
+    if ($type  < 2) {
       getHometownQuestion($facebook);
-    } else if ($type == 1) {
+    } else if ($type < 5) {
       getStatusQuestion($facebook);
-    } else if ($type == 2) {
+    } else if ($type < 6) {
       getBirthdayQuestion($facebook);
     } else {
       getInterestsQuestion($facebook);
