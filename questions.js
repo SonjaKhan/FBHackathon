@@ -27,9 +27,9 @@ $(window).load(function() {
     $("#question span").html("Question #" + questionNumber);
     $("#question p").html(question.question_text);
     $("#answers ul li label").each(function(index) {
-      $(this).html(
-        $("<input>").attr("type", "radio").attr("name", "selection").attr("value", index)
-      ).append(question.answers[index]);
+      $(this).html($("<img>").attr("src", "https://graph.facebook.com/" + question.uids[index] + "/picture?width=100&height=100").attr("alt", "Profile picture of " + question.name[index]));
+      $(this).append($("<input>").attr("type", "radio").attr("name", "selection").attr("value", index));
+	  $(this).append($("<span>").html(question.name[index]));
     });
 
     questionNumber++;

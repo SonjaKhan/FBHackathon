@@ -16,12 +16,6 @@
 		#answers ul li input {
 				display: none;
 		}
-			#answers ul li label.correct {
-				background-color: #E0FFE0;
-			}
-			#answers ul li label.incorrect {
-				background-color: #FFE0E0;
-			}
 			
 /* If the list should be styled as rows, set class on ul to "layout-rows" */
 	#answers ul.layout-rows li {
@@ -47,49 +41,66 @@
 			line-height: 2.2em;
 			cursor: pointer;
 		}
-		#answers ul.layout-rows li label.selected, #answers ul li label.correct, #answers ul li label.incorrect {
-			background-color: #fff;
+		#answers ul.layout-rows li label.selected, #answers ul.layout-rows li label.correct, #answers ul.layout-rowsli label.incorrect {
 			border-color: black;
 			margin-left: 10px;
 			height: 2.2em;
 			line-height: 2.2em;
 			cursor: pointer;
 		}
+			#answers ul.layout-rows li label img {
+				width: 100px;
+			}
 /* If the list should be styled as columns, set class on ul to "layout-columns" */
+	#answers ul.layout-columns{
+		margin-top: 10px;
+		overflow: hidden;
+		min-height: 185px;
+	}
 	#answers ul.layout-columns li {
 		display: inline-block;
+		float: left;
 	}
 	#answers ul.layout-columns li:not(:last-child) {
 		margin-right: 5px;
 	}
-		#answers ul.layout-rows li label {
+		#answers ul.layout-columns li label {
 			background-color: #f5f5f5;
 			border: 1px solid rgb(145, 145, 145);
 			display: block;
 			font-size: 16pt;
-			height: 2em;
-			line-height: 2em;
-			padding-left: 1em;
+			padding-top: 10px;
+			padding-bottom: 5px;
+			text-align: center;
 			transition: all 0.5s ease;
-			vertical-align: middle;
-			width: 700px;
+			width: 169px;
 		}
-		#answers ul.layout-rows li label:hover {
+		#answers ul.layout-columns li label:hover {
 			background-color: #fff;
 			border-color: black;
-			margin-left: 10px;
-			height: 2.2em;
-			line-height: 2.2em;
+			padding-top: 20px;
 			cursor: pointer;
 		}
-		#answers ul.layout-rows li label.selected, #answers ul li label.correct, #answers ul li label.incorrect {
-			background-color: #fff;
+		#answers ul.layout-columns li label.selected, #answers ul.layout-columns li label.correct, #answers ul.layout-columns li label.incorrect {
 			border-color: black;
-			margin-left: 10px;
-			height: 2.2em;
-			line-height: 2.2em;
+			padding-top: 20px;
 			cursor: pointer;
 		}
+			#answers ul.layout-columns li label img {
+				width: 100px;
+			}
+			#answers ul.layout-columns li label span {
+				display: block;
+			}
+	#answers ul li label.selected {
+		background-color: #fff;
+	}
+	#answers ul li label.correct {
+		background-color: #E0FFE0;
+	}
+	#answers ul li label.incorrect {
+		background-color: #FFE0E0;
+	}
 	
 
 body {
