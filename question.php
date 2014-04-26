@@ -72,7 +72,9 @@ function getHometownQuestion($facebook) {
 }
 
 function toJSON($questionArr) {
-  print_r($questionArr)
+  $question_to_json['question']['question_text'] = $questionArr['question'];
+  $question_to_json['question']['answers'] = $questionArr['answers'];
+  echo json_encode($question_to_json);
 }
 
 ?>
