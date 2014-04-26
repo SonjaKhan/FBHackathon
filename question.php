@@ -37,11 +37,10 @@ if ($user_id) {
     }*/
     print_r($hometown);
     $i = rand(0, count($hometown) - 1);
-    echo "   " . $i . "   ";
-    $hometown_keys = array_keys($hometown);
-    print_r($hometown_keys[$i]);
-    print_r($hometown[$i]);
-    //$hometown_keys['hometown_location'].city;
+    echo "   " . $i . "   \n";
+    echo $hometown[$i]['name'] . "\n";
+    echo "   " . $hometown[$i]['hometown_location']['city'] . "\n";
+    //$hometown['hometown_location'].city;
     /*foreach ($hometown as $person) {
       
       echo $person['name'];
