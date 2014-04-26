@@ -156,7 +156,7 @@ function numToMonth($month) {
       case "12":
         return "December";
   }
-
+}
 
 # prints JSON from Array
 function toJSON($questionArr) {
