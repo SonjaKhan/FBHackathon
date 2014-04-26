@@ -22,16 +22,16 @@ if ($user_id) {
                         'query' => 'SELECT uid1 FROM friend WHERE uid2=me()',
                         ));
 
-    $type = rand(0, 2);
+    $type = rand(0, 3);
     if ($type == 0) {
       getHometownQuestion($facebook);
     } else if ($type == 1) {
       getStatusQuestion($facebook);
-    } else {
+    } else if ($type == 2) {
       getBirthdayQuestion($facebook);
+    } else {
+      getInterestsQuestion($facebook);
     }
-    # getInterestsQuestion($facebook);
-
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
@@ -195,29 +195,28 @@ function numToMonth($month) {
 function getInterestsQuestion($facebook) {
   $interests = $facebook->api(array(
                         'method' => 'fql.query',
-                        'query' => 'SELECT name, uid, interests FROM user WHERE music AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())'
+                        'query' => 'SELECT name, uid, interests FROM user WHERE interests AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())'
                         ));
   $i = rand(0, count($interests) - 1);
   $questionName = $interests[$i]['name'];
   $questionUID = $interests[$i]['uid'];
-  $questionInterest = $interests[$i]['interests'];
-  $questionInterest = explode(', ', $newInterests);
-   $j = rand(0, count($questionInterest) - 1);
-  $questionInterest = $questionInterest[j];
-
+  $questionInterests = $interests[$i]['interests'];
+  $questionInterests = explode(',', $questionInterests);
+  foreach ($questionInterests as $interest) {
+    $interest = trim($interest);
+  }
+  $j = rand(0, count($questionInterests) - 1);
+  $questionInterest = $questionInterests[$j];
   $answersNames = array($questionName);
   $answersUIDs = array($questionUID);
 
-  $newInterests = $interests[0]['interests'];
-  echo $newInterests . "<br>";
-  $newInterests = explode(', ', $newInterests);
-  print_r($newInterests);
-  /*
   while (count($answersUIDs) < 4) {
     $i = rand(0, count($interests) - 1);
     $newInterests = $interests[$i]['interests'];
-    $newInterests = explode(', ', $newInterests);
-    print_r($newInterests);
+    $newInterests = explode(',', $newInterests);
+    foreach ($newInterests as $interest) {
+      $interest = trim($interest);
+    }
     if (!in_array($questionInterest, $newInterests)) {
       $newUID  = $interests[$i]['uid'];
       if (!in_array($newUID, $answersUIDs)) {
@@ -226,10 +225,10 @@ function getInterestsQuestion($facebook) {
       }
     }
   }
-  */
+  
   $question = "Who is interested in " . $questionInterest . "?";
   $questionArr = array("question" => $question, "answersNames" => $answersNames, "answersUIDs" => $answersUIDs);
-  toJSON($questionArr);
+  toJSON($questionArr, "interests");
 }
 
 # prints JSON from Array
