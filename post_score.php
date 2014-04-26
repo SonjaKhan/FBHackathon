@@ -28,13 +28,15 @@
       // In this case, we'll get an exception, so we'll
       // just ask the user to login again here.
       $login_url = $facebook->getLoginUrl(); 
-      echo '1Please <a href="' . $login_url . '">login.</a>';
+      echo 'Please <a href="' . $login_url . '">login.</a>';
+      echo $e->getType();
+      echo $e->getMessage();
       error_log($e->getType());
       error_log($e->getMessage());
     }
   } else {
     // No user, print a link for the user to login
     $login_url = $facebook->getLoginUrl();
-    echo '2Please <a href="' . $login_url . '">login.</a>';
+    echo 'Please <a href="' . $login_url . '">login.</a>';
   }
 ?>
