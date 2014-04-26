@@ -15,7 +15,7 @@
     <script>
     $(document).on('click', '#login', function(e) {
       e.preventDefault();
-      FB.login(function(){}, {scope: 'friends'});
+      FB.login();//function(){}, {scope: 'friends'});
     });
 
     window.fbAsyncInit = function() {
@@ -80,10 +80,6 @@
 
 
     <div id="content" style="display:none;">
-      <a href="#" id="logout">
-        Logout
-      </a>
-
       Here's the main stuff for the page!!
     </div>
   </body>
