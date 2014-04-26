@@ -188,8 +188,10 @@ function getInterestsQuestion($facebook) {
   $questionUID = $interests[$i]['uid'];
   $questionInterests = $interests[$i]['interests'];
   echo "question interests: " . $questionInterests . "<br>";
-  $questionInterests = explode(array(',', ' '), $questionInterests);
-  echo "in an array: " . $questionInterests . "<br>";
+  $questionInterests = multiexplode(array(',', ' '), $questionInterests);
+  echo "in an array: ";
+  print_r($questionInterests);
+  echo "<br>";
   $j = rand(0, count($questionInterests) - 1);
   $questionInterest = $questionInterests[j];
   echo "question interest: " . $questionInterest;
@@ -204,7 +206,7 @@ function getInterestsQuestion($facebook) {
   while (count($answersUIDs) < 4) {
     $i = rand(0, count($interests) - 1);
     $newInterests = $interests[$i]['interests'];
-    $newInterests = explode(', ', $newInterests);
+    $newInterests = multiexplode(array(',', ' '), $newInterests);
     print_r($newInterests);
     if (!in_array($questionInterest, $newInterests)) {
       $newUID  = $interests[$i]['uid'];
