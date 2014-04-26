@@ -22,17 +22,26 @@ if ($user_id) {
     $user_profile = $facebook->api('/me','GET');
     $namePrint = "Name: " . $user_profile['name'];
     $friends = $facebook->api(array(
-                         'method' => 'fql.query',
-                         'query' => 'SELECT uid1 FROM friend WHERE uid2=me()',
-                     ));
-    print_r($friends);
+                        'method' => 'fql.query',
+                        'query' => 'SELECT uid1 FROM friend WHERE uid2=me()',
+                        ));
+    $hometown = $facebook->api(array(
+                        'method' => 'fql.query',
+                        'query' => 'SELECT name, hometown_location.city FROM user WHERE hometown_location AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())',
+                        ));
+    /*print_r($friends);
     foreach ($friends as $friend) {
       print_r($friend['uid1']);
       /*$nameOfFriend = $facebook->api(array(
                          'method' => 'fql.query',
                          'query' => "SELECT name FROM user WHERE uid=" . $friend['uid1'] . "",
                      ));
-      print_r($nameOfFriend);*/
+      print_r($nameOfFriend);
+    }*/
+    foreach ($hometown as $person) {
+      echo $person['name'];
+      print_r($person['hometown_location']);
+      break;
     }
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
