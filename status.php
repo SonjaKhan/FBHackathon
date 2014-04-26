@@ -93,7 +93,7 @@ function getStatusQuestion($facebook) {
     $i = rand(0, count($friends) - 1);
     $uid = $friends[$i]['uid'];
     $answersUIDs[0] = $uid;
-    $answerNames[0] = htmlentities($friends[$i]['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8'));
+    $answerNames[0] = htmlentities($friends[$i]['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
     $statuses = $facebook->api(array(
                             'method' => 'fql.query',
                             'query' => 'SELECT message, like_info.like_count FROM status WHERE uid = ' . $uid,
