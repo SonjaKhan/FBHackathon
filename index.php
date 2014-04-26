@@ -7,6 +7,7 @@
     <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="style.js"></script>
     <script src="questions.js"></script>
+    <script src="jquery.spin.js"></script>
   </head>
   <body>
     <div id="fb-root"></div>
