@@ -13,6 +13,7 @@
   $user_id = $facebook->getUser();
 
   $score = intval($_GET['score']);
+  echo "Score: {$score}";
 
   if ($user_id) {
     try {
