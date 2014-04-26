@@ -31,12 +31,14 @@ if ($user_id) {
                      ));
       print_r($nameOfFriend);
     }*/
-  /*
-  $answers = array($hometown[$i]['name'], "Sonja", "Colin", "Nick");
-  $questionArr = array("question" => $question, "answers" => $answers);
-  toJSON($questionArr);
-  */
-    getHometownQuestion($facebook);
+    $hometowns = $facebook->api(array(
+                        'method' => 'fql.query',
+                        'query' => 'SELECT name, hometown_location.city FROM user WHERE hometown_location AND uid in (SELECT uid1 FROM friend WHERE uid2 = me())',
+                        ));
+    $i = rand(0, count($hometowns) - 1);
+    $questionHometown = $hometowns[$i]['hometown_location']['city'];
+    $question = "Who is from " . $questionHometown . "?";
+    //getHometownQuestion($facebook);
   } catch (FacebookApiException $e) {
     // If the user is logged out, you can have a 
     // user ID even though the access token is invalid.
@@ -52,7 +54,7 @@ if ($user_id) {
 	$login_url = $facebook->getLoginUrl();
   echo 'Please <a href="' . $login_url . '">login.</a>';
 }
-
+/*
 function getHometownQuestion($facebook) {
   $hometowns = $facebook->api(array(
                         'method' => 'fql.query',
@@ -67,10 +69,8 @@ function getHometownQuestion($facebook) {
 }
 
 function toJSON($questionArr) {
-  $question_to_json['question']['question_text'] = $questionArr['question'];
-  $question_to_json['question']['answers'] = $questionArr['answers'];
-  echo json_encode($question_to_json);
-}
+  print_r($questionArr)
+}*/
 
 ?>
 <!DOCTYPE HTML>
