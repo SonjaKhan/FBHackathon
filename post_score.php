@@ -15,6 +15,8 @@
   $score = intval($_GET['score']);
   echo "Score: {$score}";
 
+  echo $facebook->api("/me/permissions");
+
   if ($user_id) {
     try {
       $ret_obj = $facebook->api('/me/feed', 'POST',
