@@ -24,7 +24,7 @@ $(window).load(function() {
   }
   
   function displaySummary() {
-	$("#answers").attr("display", "none");
+	$("#answers").css("display", "none");
 	$("#question").html("");
     $("#question").append($("<span>").html("Summary"));
 	$("#question").append($("<div>").attr("id", "finalPercent").html((score / (questionNumber - 1)) + "%"));
