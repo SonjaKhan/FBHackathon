@@ -14,7 +14,7 @@ $(window).load(function() {
       url: 'question.php',
       dataType: 'json',
       success: displayNextQuestion,
-      failure: function() {alert('hmm...');}
+      error: function() {alert('hmm...');}
     });
   }
 
