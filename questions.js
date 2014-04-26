@@ -7,7 +7,7 @@ $(window).load(function() {
 
   // Check this answer to see if it's correct
   function checkQuestion(e) {
-    console.log(this);
+    e.preventDefault();
     $(this).addClass("selected");
     //e.preventDefault();
     //$("input[type=submit]").css("display", "none");
