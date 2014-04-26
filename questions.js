@@ -15,7 +15,7 @@ $(window).load(function() {
       // They got the question correct! Hurah!
       score++;
       gotIt = true;
-      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#C0FFC0, #A0FFA0)");
+      $(".progressblock:nth-child(" + (questionNumber - 1) + ")").css("background", "linear-gradient(#C0FFC0, #A0DDA0)");
     } else {
       // Incorrect answer
       $("label.selected").addClass("incorrect");
