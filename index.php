@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>
-      Facebook Hackathon
-    </title>
+    <title>Facebook Hack-a-thon</title>
     <link href="style.css" rel="stylesheet" type="text/css" media="all" />
-    <script src="https://code.jquery.com/jquery-1.11.0.min.js">
-    </script>
-    <script src="questions.js">
-    </script>
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css' />
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="style.js"></script>
+    <script src="questions.js"></script>
   </head>
   <body>
     <div id="fb-root"></div>
@@ -77,9 +75,23 @@
       Login
     </a>
 
-
-    <div id="content" style="display:none;">
-      Here's the main stuff for the page!!
+    <div id="content">
+      <div id="question">
+        <span>Question #X:</span>
+        <p>Which friend has been to <strong>Paris</strong>?</p>
+      </div>
+      <form action="/">
+        <div id="answers">
+          <ul class="layout-columns">
+            <li><label><input type="radio" name="selection" value="0" />Roee Avnon</label></li>
+            <li><label><input type="radio" name="selection" value="1" />Sonja Khan</label></li>
+            <li><label><input type="radio" name="selection" value="2" />Nicholas Reiter</label></li>
+            <li><label><input type="radio" name="selection" value="3" />Colin Miller</label></li>
+          </ul>
+          <input type="submit" />
+          <input id="next_question_button" type="button" value="Next Question" />
+        </div>
+      </form>
     </div>
   </body>
 </html>
