@@ -186,12 +186,12 @@ function getInterestsQuestion($facebook) {
   $i = rand(0, count($interests) - 1);
   $questionName = $interests[$i]['name'];
   $questionUID = $interests[$i]['uid'];
-  $questionInterest = $interests[$i]['interests'];
+  $questionInterests = $interests[$i]['interests'];
   echo "question interests: " . $questionInterests . "<br>";
-  $questionInterest = explode(', ', $newInterests);
+  $questionInterests = explode(', ', $questionInterests);
   echo "in an array: " . $questionInterests . "<br>";
-  $j = rand(0, count($questionInterest) - 1);
-  $questionInterest = $questionInterest[j];
+  $j = rand(0, count($questionInterests) - 1);
+  $questionInterest = $questionInterests[j];
 
   $answersNames = array($questionName);
   $answersUIDs = array($questionUID);
