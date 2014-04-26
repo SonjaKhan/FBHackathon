@@ -7,14 +7,12 @@ $(window).load(function() {
   // Sends off an AJAX request to server to fetch the info
   // for the next question
   function fetchNextQuestion(e) {
-    alert('what');
     e.preventDefault();
 
     $.ajax({
       url: 'question.php',
       dataType: 'json',
-      success: displayNextQuestion,
-      error: function(a, b, c) {alert('b: ' + b + ' c: ' + c);}
+      success: displayNextQuestion
     });
   }
 
@@ -25,7 +23,6 @@ $(window).load(function() {
   }
 
   function displayNextQuestion(data) {
-    alert(data);
     question = data.question;
     $("#question span").html("Question #" + questionNumber);
     $("#question p").html(question.question_text);
