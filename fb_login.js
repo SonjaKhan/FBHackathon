@@ -18,13 +18,13 @@ $(window).load(function() {
       FB.login();
     }
   });
-}
 
-// Here we run a very simple test of the Graph API after login is successful. 
-// This testAPI() function is only called in those cases. 
-function loggedIn() {
-  console.log('Welcome!  Fetching your information.... ');
-  FB.api('/me', function(response) {
-    console.log('Good to see you, ' + response.name + '.');
-  });
+  // Here we run a very simple test of the Graph API after login is successful. 
+  // This testAPI() function is only called in those cases. 
+  function loggedIn() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Good to see you, ' + response.name + '.');
+    });
+  }
 }
