@@ -1,6 +1,6 @@
 $(window).load(function() {
   var questionNumber = 1;
-  var score = 0;
+  score = 0;
 
   $(document).on('click', '#begin a', beginQuestions);
   $(document).on('click', 'label', checkQuestion);
