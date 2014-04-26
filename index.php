@@ -13,7 +13,7 @@
     <script>
       $(document).on('click', '#login a', function(e) {
         e.preventDefault();
-        FB.login(function(){}, {scope:'user_hometown,friends_hometown'});
+        FB.login(function(){}, {scope:'user_hometown,friends_hometown,user_birthday,friends_birthday,user_status,friends_status'});
       });
 
       window.fbAsyncInit = function() {
@@ -43,7 +43,7 @@
           // login status of the person. In this case, we're handling the situation where they 
           // have logged in to the app.
           FB.api('/me/permissions', function (response) {
-            if(response.data[0]['user_hometown'] == 1) {
+            if(response.data[0]['user_status'] == 1) {
               console.log('Permissions are granted.');
               $('#begin').css('display', 'block');
               $('#login').css('display', 'none');
