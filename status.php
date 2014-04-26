@@ -117,7 +117,7 @@ function getStatusQuestion($facebook) {
     $newCount = $status['like_info']['like_count'];
     if ($newCount > $likeCount) {
       $likeCount = $newCount;
-      $question = $status['message'];
+      $question = htmlentities($status['message'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
     }
   }
   echo $answerNames[0];
