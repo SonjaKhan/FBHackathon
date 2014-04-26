@@ -135,8 +135,8 @@
           Begin!
         </a>
         <p>
-          How well do you know your friends? Please put away your notes and books; the Facebook Final
-		  is about to begin.
+          The Facebook Final is about to begin. This is a closed book, open face exam. How well
+		  do you know your friends?
         </p>
       </div>
     </div>
