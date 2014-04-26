@@ -2,7 +2,7 @@
 require_once('php-sdk/facebook.php');
 
 $config = array(
-	'appId' => '649041091809661',
+  'appId' => '649041091809661',
   'secret' => '8a01b28cb5e95f6dbf6c0871a53f73ac',
   'fileUpload' => false, // optional
   'allowSignedRequest' => false, // optional, but should be set to false for non-canvas apps
@@ -36,8 +36,8 @@ if ($user_id) {
     error_log($e->getMessage());
   }
 } else {
-	// No user, print a link for the user to login
-	$login_url = $facebook->getLoginUrl();
+  // No user, print a link for the user to login
+  $login_url = $facebook->getLoginUrl();
   echo 'Please <a href="' . $login_url . '">login.</a>';
 }
 
