@@ -17,12 +17,12 @@ $(window).load(function() {
 
   function displayNextQuestion(data) {
     alert(data);
-	$("#question span").html("Question #" + questionNumber);
-	$("#question p").html(data.question_text);
-	$("#answers ul li label").each(function(index) {
-		$(this).html($("<label>").append(
-			$("<input>").attr("type", "radio").attr("name", "selection").attr("value", index);
-		).append(data.answers[index]));
-	});
+	//$("#question span").html("Question #" + questionNumber);
+	//$("#question p").html(data.question_text);
+	//$("#answers ul li label").each(function(index) {
+		//$(this).html($("<label>").append(
+			//$("<input>").attr("type", "radio").attr("name", "selection").attr("value", index);
+		//).append(data.answers[index]));
+	//});
   }
 });
